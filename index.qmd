@@ -1,14 +1,25 @@
 ---
-title: "Beta Item Response Model With Response Styles: Illustration"
+title: "Detecting Response Styles in Slider Scales"
+subtitle: "Poster Online Materials for the 2025 SMiP Summer School"
+author: 
+  - name: "Dominik Vollbracht"
+    email: d.vollbracht@rptu.de
 filters:
     - shinylive
+format: 
+  html:
+    toc: true
+    code-tools: true
 ---
+
+
+# Shiny App
 
 *It can take a few seconds (around 10s-30s) to load the app, please be patient.*
 
 ```{shinylive-r}
 #| standalone: true
-#| viewerHeight: 1000
+#| viewerHeight: 1500
 #| viewerWidth: 2000
 
 library(shiny)
@@ -118,8 +129,10 @@ ui <- navbarPage(
         sliderInput("tau_birm", withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter")), min = 0, max = 3, value = 2, step = 0.2)
       ),
       mainPanel(
-        uiOutput("BIRM_equation_title"),
-        uiOutput("BIRM_equation"),
+        uiOutput("BIRM_equation_title1"),
+        uiOutput("BIRM_equation1"),
+        uiOutput("BIRM_equation_title2"),
+        uiOutput("BIRM_equation2"),
         plotOutput("BIRM")
       )
     )
@@ -138,8 +151,10 @@ ui <- navbarPage(
         sliderInput("tau_ers", withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter")), min = 0, max = 3, value = 2, step = 0.2)
       ),
       mainPanel(
-        uiOutput("ERS_equation_title"),
-        uiOutput("ERS_equation"),
+        uiOutput("ERS_equation_title1"),
+        uiOutput("ERS_equation1"),
+        uiOutput("ERS_equation_title2"),
+        uiOutput("ERS_equation2"),
         plotOutput("ERS")
       )
     )
@@ -160,8 +175,10 @@ ui <- navbarPage(
         radioButtons("x_ars", label = HTML("\\(x_{j}\\): item wording"), selected = 1, choiceNames = c("1: normal-scored", "-1: reverse-scored"), choiceValues = c(1, -1))
       ),
       mainPanel(
-        uiOutput("ARS_equation_title"),
-        uiOutput("ARS_equation"),
+        uiOutput("ARS_equation_title1"),
+        uiOutput("ARS_equation1"),
+        uiOutput("ARS_equation_title2"),
+        uiOutput("ARS_equation2"),
         plotOutput("ARS")
       )
     )
@@ -233,19 +250,36 @@ server <- function(input, output) {
     BIRM(theta = input$theta_birm, delta = input$delta_birm, tau = input$tau_birm)
   })
   
-  output$BIRM_equation_title <- renderUI({
+  # let us do equation1 and equation2 for BIRM and then delete the old equation
+  output$BIRM_equation_title1 <- renderUI({
     tags$div(
       style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
       tags$b("Equations for the Probability Density Function")
     )
   })
-  
-  output$BIRM_equation <- renderUI({
+
+  output$BIRM_equation_title2 <- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+
+  output$BIRM_equation1 <- renderUI({
     withMathJax(
       paste0(
-        "$$m_{ij} = exp(\\frac{\\theta_i - \\delta_j + \\tau_j}{2}) = exp(\\frac{", input$theta_birm, " - ", input$delta_birm, " + ", input$tau_birm, "}{2}) = ", 
+        "$$m_{ij} = exp(\\frac{\\theta_i - \\delta_j + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-(\\theta_i - \\delta_j) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$BIRM_equation2 <- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{", input$theta_birm, " - ", input$delta_birm, " + ", input$tau_birm, "}{2}) = ", 
         BIRM(theta = input$theta_birm, delta = input$delta_birm, tau = input$tau_birm, equation = TRUE)[1], ",$$\n",
-        "$$n_{ij} = exp(\\frac{-(\\theta_i - \\delta_j) + \\tau_j}{2}) = exp(\\frac{-(", input$theta_birm, " - ", input$delta_birm, ") + ", input$tau_birm, "}{2}) = ",
+        "$$n_{ij} = exp(\\frac{-(", input$theta_birm, " - ", input$delta_birm, ") + ", input$tau_birm, "}{2}) = ",
         BIRM(theta = input$theta_birm, delta = input$delta_birm, tau = input$tau_birm, equation = TRUE)[2], "$$\n"
       )
     )
@@ -295,46 +329,76 @@ server <- function(input, output) {
   output$ERS <- renderPlot({
     BIRM_ERS(theta = input$theta_ers, delta = input$delta_ers, tau = input$tau_ers, ers = input$ers_ers)
   })
-  
-  output$ERS_equation_title <- renderUI({
+
+  output$ERS_equation_title1 <- renderUI({
     tags$div(
       style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
       tags$b("Equations for the Probability Density Function")
     )
   })
-  
-  output$ERS_equation <- renderUI({
+
+  output$ERS_equation_title2 <- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+
+  # modify the equation to split it (1 and 2)
+  output$ERS_equation1 <- renderUI({
     withMathJax(
       paste0(
-        "$$m_{ij} = exp(\\frac{exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j) + \\tau_j}{2}) = ", 
-        "exp(\\frac{exp(", input$ers_ers, ") \\cdot (", input$theta_ers, " - ", input$delta_ers, ") + ", input$tau_ers, "}{2}) = ",
+        "$$m_{ij} = exp(\\frac{exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j) + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$ERS_equation2 <- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(", input$ers_ers, ") \\cdot (", input$theta_ers, " - ", input$delta_ers, ") + ", input$tau_ers, "}{2}) = ", 
         BIRM_ERS(theta = input$theta_ers, delta = input$delta_ers, tau = input$tau_ers, ers = input$ers_ers, equation = TRUE)[1], ",$$\n",
-        "$$n_{ij} = exp(\\frac{-exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j) + \\tau_j}{2}) = ",
-        "exp(\\frac{-exp(", input$ers_ers, ") \\cdot (", input$theta_ers, " - ", input$delta_ers, ") + ", input$tau_ers, "}{2}) = ",
+        "$$n_{ij} = exp(\\frac{-exp(", input$ers_ers, ") \\cdot (", input$theta_ers, " - ", input$delta_ers, ") + ", input$tau_ers, "}{2}) = ",
         BIRM_ERS(theta = input$theta_ers, delta = input$delta_ers, tau = input$tau_ers, ers = input$ers_ers, equation = TRUE)[2], "$$\n"
       )
     )
   })
+
   
   output$ARS <- renderPlot({
     BIRM_ARS(theta = input$theta_ars, delta = input$delta_ars, tau = input$tau_ars, ars = input$ars_ars, x = input$x_ars)
   })
   
-  output$ARS_equation_title <- renderUI({
+  output$ARS_equation_title1 <- renderUI({
     tags$div(
       style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
       tags$b("Equations for the Probability Density Function")
     )
   })
+
+  output$ARS_equation_title2 <- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
   
-  output$ARS_equation <- renderUI({
+  output$ARS_equation1 <- renderUI({
     withMathJax(
       paste0(
-        "$$m_{ij} = exp(\\frac{(\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2}) = ", 
-        "exp(\\frac{(", input$theta_ars, " - ", input$delta_ars, " + ", input$x_ars, " \\cdot ", input$ars_ars, ") + ", input$tau_ars, "}{2}) = ",
+        "$$m_{ij} = exp(\\frac{(\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-(\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$ARS_equation2 <- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{(", input$theta_ars, " - ", input$delta_ars, " + ", input$x_ars, " \\cdot ", input$ars_ars, ") + ", input$tau_ars, "}{2}) = ", 
         BIRM_ARS(theta = input$theta_ars, delta = input$delta_ars, tau = input$tau_ars, ars = input$ars_ars, x = input$x_ars, equation = TRUE)[1], ",$$\n",
-        "$$n_{ij} = exp(\\frac{-(\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2}) = ",
-        "exp(\\frac{-(", input$theta_ars, " - ", input$delta_ars, " + ", input$x_ars, " \\cdot ", input$ars_ars, ") + ", input$tau_ars, "}{2}) = ",
+        "$$n_{ij} = exp(\\frac{-(", input$theta_ars, " - ", input$delta_ars, " + ", input$x_ars, " \\cdot ", input$ars_ars, ") + ", input$tau_ars, "}{2}) = ",
         BIRM_ARS(theta = input$theta_ars, delta = input$delta_ars, tau = input$tau_ars, ars = input$ars_ars, x = input$x_ars, equation = TRUE)[2], "$$\n"
       )
     )
@@ -401,3 +465,7 @@ shinyApp(ui = ui, server = server)
 
 
 ```
+
+# PDF of the Poster
+
+Download the Poster PDF
