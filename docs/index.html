@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dominik Vollbracht">
+
+<title>Detecting Response Styles in Slider Scales</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-c55efa1fd218a545ebab9e5bcab7af02.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<meta name="shinylive:serviceworker_dir" content=".">
+<script src="index_files/libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="index_files/libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
+<link href="index_files/libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
+<link href="index_files/libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#shiny-app" id="toc-shiny-app" class="nav-link active" data-scroll-target="#shiny-app">Shiny App</a></li>
+  <li><a href="#pdf-of-the-poster" id="toc-pdf-of-the-poster" class="nav-link" data-scroll-target="#pdf-of-the-poster">PDF of the Poster</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Detecting Response Styles in Slider Scales</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Poster Online Materials for the 2025 SMiP Summer School</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dominik Vollbracht <a href="mailto:d.vollbracht@rptu.de" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="shiny-app" class="level1">
+<h1>Shiny App</h1>
+<p><em>It can take a few seconds (around 10s-30s) to load the app, please be patient.</em></p>
+<pre class="shinylive-r" data-engine="r"><code>#| '!! shinylive warning !!': |
+#|   shinylive does not work in self-contained HTML documents.
+#|   Please set `embed-resources: false` in your metadata.
+#| standalone: true
+#| viewerHeight: 1500
+#| viewerWidth: 2000
+
+library(shiny)
+library(bslib)
+library(shinylive)
+library(shinythemes)
+
+beta_normal &lt;- function(m = 2, n = 2) {
+  vals &lt;- dbeta(seq(0, 1, by = 0.01), m, n)
+  plot(seq(0, 1, by = 0.01), vals, type = "l", xlim = c(0, 1), 
+       xlab = expression(bold(X[ij])), 
+       ylab = expression(bold(f(X[ij]))), 
+       main = bquote(bold("Probability Density Function for B(" * .(round(m, 2)) * ", " * .(round(n, 2)) * ")")))
+}
+
+BIRM &lt;- function(theta, delta, tau, equation = FALSE) {
+  middle &lt;- theta - delta
+  enumerator_m &lt;- middle + tau
+  enumerator_n &lt;- -middle + tau
+  m &lt;- exp(enumerator_m / 2)
+  n &lt;- exp(enumerator_n / 2)
+  if (equation == TRUE) return(round(c(m, n), 2))
+  beta_normal(m, n)
+}
+
+BIRM_ERS &lt;- function(theta, delta, tau, ers, equation = FALSE) {
+  middle &lt;- theta - delta
+  ers_exp &lt;- exp(ers)
+  enumerator_m &lt;- ers_exp * middle + tau
+  enumerator_n &lt;- -ers_exp * middle + tau
+  m &lt;- exp(enumerator_m / 2)
+  n &lt;- exp(enumerator_n / 2)
+  if (equation == TRUE) return(round(c(m, n), 2))
+  beta_normal(m, n)
+}
+
+BIRM_ARS &lt;- function(theta, delta, tau, ars, x = 1, equation = FALSE) {
+  x &lt;- as.numeric(x)
+  middle &lt;- theta - delta + x * ars
+  enumerator_m &lt;- middle + tau
+  enumerator_n &lt;- -middle + tau
+  m &lt;- exp(enumerator_m / 2)
+  n &lt;- exp(enumerator_n / 2)
+  if (equation == TRUE) return(round(c(m, n), 2))
+  beta_normal(m, n)
+}
+
+BIRM_RS &lt;- function(theta, delta, tau, ers, ars, x = 1, equation = FALSE) {
+  x &lt;- as.numeric(x)
+  middle &lt;- theta - delta + x * ars
+  ers_exp &lt;- exp(ers)
+  enumerator_m &lt;- ers_exp * middle + tau
+  enumerator_n &lt;- -ers_exp * middle + tau
+  m &lt;- exp(enumerator_m / 2)
+  n &lt;- exp(enumerator_n / 2)
+  if (equation == TRUE) return(round(c(m, n), 2))
+  beta_normal(m, n)
+}
+
+beta_sample &lt;- function(n = 1000, delta = 0, theta_mu = 0, theta_sd = 1, tau = 2, ars_mu = 0, ars_sd = 0.5, x = 1, ers_mu = 0, ers_sd = 0.5) {
+  x &lt;- as.numeric(x)
+  theta_vals &lt;- rnorm(n, theta_mu, theta_sd)
+  ars_vals &lt;- rnorm(n, ars_mu, ars_sd)
+  ers_vals &lt;- rnorm(n, ers_mu, ers_sd)
+
+  vec &lt;- NULL
+
+  for (i in 1:n) {
+    tmp &lt;- BIRM_RS(theta = theta_vals[i], delta = delta, tau = tau, ers = ers_vals[i], ars = ars_vals[i], x = x, equation = TRUE)
+    vec &lt;- c(vec, rbeta(1, tmp[1], tmp[2]))
+  }
+  
+  par(mar=c(5.1,4.5,4.1,2.1))
+
+  plot(density(vec), main = paste0("Density From Simulated Data (n = ", n, ")"), xlab = expression(bold(X[ij])), ylab = expression(bold(hat(f)(X[ij]))))
+}
+
+
+# Refactor the UI using navbarPage and nav_panel
+ui &lt;- navbarPage(
+  title = "Beta Item Response Theory With Response Styles: Illustration",
+  theme = shinytheme("cerulean"),
+  
+  # Beta Normal Tab
+  nav_panel(
+    "Standard Beta",
+    sidebarLayout(
+      sidebarPanel(
+        withMathJax(HTML("&lt;h4&gt;&lt;b&gt;Shape Parameters&lt;/b&gt;&lt;/h4&gt;")),
+        sliderInput("m_beta", withMathJax(HTML("\\(m_{ij}\\)")), min = 0, max = 10, value = 2, step = 0.5),
+        sliderInput("n_beta", withMathJax(HTML("\\(n_{ij}\\)")), min = 0, max = 10, value = 2, step = 0.5)
+      ),
+      mainPanel(plotOutput("beta_normal"))
+    )
+  ),
+  
+  # BIRM Tab
+  nav_panel(
+    "BIRM",
+    sidebarLayout(
+      sidebarPanel(
+        withMathJax(HTML("&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;")), 
+        sliderInput("theta_birm", withMathJax(HTML("\\(\\theta_{i}\\): latent trait")), min = -3, max = 3, value = 0, step = 0.2),
+        withMathJax(HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;")),
+        withMathJax(HTML("&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;")), 
+        sliderInput("delta_birm", withMathJax(HTML("\\(\\delta_{j}\\): item difficulty")), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("tau_birm", withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter")), min = 0, max = 3, value = 2, step = 0.2)
+      ),
+      mainPanel(
+        uiOutput("BIRM_equation_title1"),
+        uiOutput("BIRM_equation1"),
+        uiOutput("BIRM_equation_title2"),
+        uiOutput("BIRM_equation2"),
+        plotOutput("BIRM")
+      )
+    )
+  ),
+  # ERS Only Tab
+  nav_panel(
+    "ERS only",
+    sidebarLayout(
+      sidebarPanel(
+        HTML("&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"), 
+        sliderInput("theta_ers", withMathJax(HTML("\\(\\theta_{i}\\): latent trait")), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("ers_ers", withMathJax(HTML("\\(\\eta_{i}^{ERS}\\): ERS parameter")), min = -1, max = 1, value = 0, step = 0.2),
+        withMathJax(HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;")),
+        withMathJax(HTML("&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;")), 
+        sliderInput("delta_ers", withMathJax(HTML("\\(\\delta_{j}\\): item difficulty")), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("tau_ers", withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter")), min = 0, max = 3, value = 2, step = 0.2)
+      ),
+      mainPanel(
+        uiOutput("ERS_equation_title1"),
+        uiOutput("ERS_equation1"),
+        uiOutput("ERS_equation_title2"),
+        uiOutput("ERS_equation2"),
+        plotOutput("ERS")
+      )
+    )
+  ),
+  
+  # ARS Only Tab
+  nav_panel(
+    "ARS Only",
+    sidebarLayout(
+      sidebarPanel(
+        HTML("&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"), 
+        sliderInput("theta_ars", HTML("\\(\\theta_{i}\\): latent trait"), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("ars_ars", HTML("\\(\\eta_{i}^{ARS}\\): ARS parameter"), min = -1, max = 1, value = 0, step = 0.2),
+        HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"),
+        HTML("&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"), 
+        sliderInput("delta_ars", HTML("\\(\\delta_{j}\\): item difficulty"), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("tau_ars", HTML("\\(\\tau_{j}\\): item dispersion parameter"), min = 0, max = 3, value = 2, step = 0.2),
+        radioButtons("x_ars", label = HTML("\\(x_{j}\\): item wording"), selected = 1, choiceNames = c("1: normal-scored", "-1: reverse-scored"), choiceValues = c(1, -1))
+      ),
+      mainPanel(
+        uiOutput("ARS_equation_title1"),
+        uiOutput("ARS_equation1"),
+        uiOutput("ARS_equation_title2"),
+        uiOutput("ARS_equation2"),
+        plotOutput("ARS")
+      )
+    )
+  ),
+  
+  # BIRM-RS Tab
+  nav_panel(
+    "BIRM-RS",
+    sidebarLayout(
+      sidebarPanel(
+        HTML("&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"), 
+        sliderInput("theta_birm_rs", HTML("\\(\\theta_{i}\\): latent trait"), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("ers_birm_rs", HTML("\\(\\eta_{i}^{ERS}\\): ERS parameter"), min = -1, max = 1, value = 0, step = 0.2),
+        sliderInput("ars_birm_rs", HTML("\\(\\eta_{i}^{ARS}\\): ARS parameter"), min = -1, max = 1, value = 0, step = 0.2),
+        HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"),
+        HTML("&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"), 
+        sliderInput("delta_birm_rs", HTML("\\(\\delta_{j}\\): item difficulty"), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("tau_birm_rs", HTML("\\(\\tau_{j}\\): item dispersion parameter"), min = 0, max = 3, value = 2, step = 0.2),
+        radioButtons("x_birm_rs", label = HTML("\\(x_{j}\\): item wording"), selected = 1, choiceNames = c("1: normal-scored", "-1: reverse-scored"), choiceValues = c(1, -1))
+      ),
+      mainPanel(
+        uiOutput("BIRM_RS_equation_title1"),
+        uiOutput("BIRM_RS_equation1"),
+        uiOutput("BIRM_RS_equation_title2"),
+        uiOutput("BIRM_RS_equation2"),
+        plotOutput("BIRM_RS")
+      )
+    )
+  ),
+  
+  # BIRM-RS Simulation Tab
+  nav_panel(
+    "BIRM-RS Simulation",
+    sidebarLayout(
+      sidebarPanel(
+        withMathJax(HTML("&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;")), 
+        sliderInput("theta_mu_sim", withMathJax(HTML("\\(E(\\theta_{i})\\): expected value of the latent trait")), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("theta_sd_sim", withMathJax(HTML("\\(SD(\\theta_{i})\\): standard deviation of the latent trait")), min = 0, max = 3, value = 1, step = 0.2),
+        withMathJax(HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;")),
+        sliderInput("ers_mu_sim", withMathJax(HTML("\\(E(\\eta_{i}^{ERS})\\): expected value of the ERS parameter")), min = -1, max = 1, value = 0, step = 0.2),
+        sliderInput("ers_sd_sim", withMathJax(HTML("\\(SD(\\eta_{i}^{ERS})\\): standard deviation of the ERS parameter")), min = 0, max = 1, value = 0.5, step = 0.1),
+        withMathJax(HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;")),
+        sliderInput("ars_mu_sim", withMathJax(HTML("\\(E(\\eta_{i}^{ARS})\\): expected value of the ARS parameter")), min = -1, max = 1, value = 0, step = 0.2),
+        sliderInput("ars_sd_sim", withMathJax(HTML("\\(SD(\\eta_{i}^{ARS})\\): standard deviation of the ARS parameter")), min = 0, max = 1, value = 0.5, step = 0.1),
+        withMathJax(HTML("&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;")),
+        withMathJax(HTML("&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;")), 
+        sliderInput("delta_sim", withMathJax(HTML("\\(\\delta_{j}\\): item difficulty")), min = -3, max = 3, value = 0, step = 0.2),
+        sliderInput("tau_sim", withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter")), min = 0, max = 3, value = 2, step = 0.2),
+        radioButtons("x_sim", label = withMathJax(HTML("\\( x_{j} \\): item wording")), selected = 1, choiceNames = c("1: normal-scored", "-1: reverse-scored"), choiceValues = c(1, -1))
+      ),
+      mainPanel(
+        uiOutput("simulation_equation_title1"), 
+        uiOutput("simulation_equation1"),
+        uiOutput("simulation_equation_title2"),
+        uiOutput("simulation_equation2"),
+        uiOutput("simulation_equation_title3"),
+        uiOutput("simulation_equation3"),
+        plotOutput("simulation"))
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$beta_normal &lt;- renderPlot({
+    beta_normal(m = input$m_beta, n = input$n_beta)
+  })
+  
+  output$BIRM &lt;- renderPlot({
+    BIRM(theta = input$theta_birm, delta = input$delta_birm, tau = input$tau_birm)
+  })
+  
+  # let us do equation1 and equation2 for BIRM and then delete the old equation
+  output$BIRM_equation_title1 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations for the Probability Density Function")
+    )
+  })
+
+  output$BIRM_equation_title2 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+
+  output$BIRM_equation1 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{\\theta_i - \\delta_j + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-(\\theta_i - \\delta_j) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$BIRM_equation2 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{", input$theta_birm, " - ", input$delta_birm, " + ", input$tau_birm, "}{2}) = ", 
+        BIRM(theta = input$theta_birm, delta = input$delta_birm, tau = input$tau_birm, equation = TRUE)[1], ",$$\n",
+        "$$n_{ij} = exp(\\frac{-(", input$theta_birm, " - ", input$delta_birm, ") + ", input$tau_birm, "}{2}) = ",
+        BIRM(theta = input$theta_birm, delta = input$delta_birm, tau = input$tau_birm, equation = TRUE)[2], "$$\n"
+      )
+    )
+  })
+
+  output$BIRM_RS_equation_title1 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations for the Probability Density Function")
+    )
+  })
+
+  output$BIRM_RS_equation_title2 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+  
+  output$BIRM_RS &lt;- renderPlot({
+    BIRM_RS(theta = input$theta_birm_rs, delta = input$delta_birm_rs, tau = input$tau_birm_rs, 
+            ars = input$ars_birm_rs, x = input$x_birm_rs, ers = input$ers_birm_rs)
+  })
+  
+  output$BIRM_RS_equation1 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$BIRM_RS_equation2 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(", input$ers_birm_rs, ") \\cdot (", input$theta_birm_rs, " - ", input$delta_birm_rs, " + ", input$x_birm_rs, " \\cdot ", input$ars_birm_rs, ") + ", input$tau_birm_rs, "}{2}) = ",
+        BIRM_RS(theta = input$theta_birm_rs, delta = input$delta_birm_rs, tau = input$tau_birm_rs, 
+                ars = input$ars_birm_rs, x = input$x_birm_rs, ers = input$ers_birm_rs, equation = TRUE)[1], ",$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(", input$ers_birm_rs, ") \\cdot (", input$theta_birm_rs, " - ", input$delta_birm_rs, " + ", input$x_birm_rs, " \\cdot ", input$ars_birm_rs, ") + ", input$tau_birm_rs, "}{2}) = ",
+        BIRM_RS(theta = input$theta_birm_rs, delta = input$delta_birm_rs, tau = input$tau_birm_rs, 
+                ars = input$ars_birm_rs, x = input$x_birm_rs, ers = input$ers_birm_rs, equation = TRUE)[2], "$$\n"
+      )
+    )
+  })
+  
+  output$ERS &lt;- renderPlot({
+    BIRM_ERS(theta = input$theta_ers, delta = input$delta_ers, tau = input$tau_ers, ers = input$ers_ers)
+  })
+
+  output$ERS_equation_title1 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations for the Probability Density Function")
+    )
+  })
+
+  output$ERS_equation_title2 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+
+  # modify the equation to split it (1 and 2)
+  output$ERS_equation1 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j) + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$ERS_equation2 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(", input$ers_ers, ") \\cdot (", input$theta_ers, " - ", input$delta_ers, ") + ", input$tau_ers, "}{2}) = ", 
+        BIRM_ERS(theta = input$theta_ers, delta = input$delta_ers, tau = input$tau_ers, ers = input$ers_ers, equation = TRUE)[1], ",$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(", input$ers_ers, ") \\cdot (", input$theta_ers, " - ", input$delta_ers, ") + ", input$tau_ers, "}{2}) = ",
+        BIRM_ERS(theta = input$theta_ers, delta = input$delta_ers, tau = input$tau_ers, ers = input$ers_ers, equation = TRUE)[2], "$$\n"
+      )
+    )
+  })
+
+  
+  output$ARS &lt;- renderPlot({
+    BIRM_ARS(theta = input$theta_ars, delta = input$delta_ars, tau = input$tau_ars, ars = input$ars_ars, x = input$x_ars)
+  })
+  
+  output$ARS_equation_title1 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations for the Probability Density Function")
+    )
+  })
+
+  output$ARS_equation_title2 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+  
+  output$ARS_equation1 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{(\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-(\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$ARS_equation2 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{(", input$theta_ars, " - ", input$delta_ars, " + ", input$x_ars, " \\cdot ", input$ars_ars, ") + ", input$tau_ars, "}{2}) = ", 
+        BIRM_ARS(theta = input$theta_ars, delta = input$delta_ars, tau = input$tau_ars, ars = input$ars_ars, x = input$x_ars, equation = TRUE)[1], ",$$\n",
+        "$$n_{ij} = exp(\\frac{-(", input$theta_ars, " - ", input$delta_ars, " + ", input$x_ars, " \\cdot ", input$ars_ars, ") + ", input$tau_ars, "}{2}) = ",
+        BIRM_ARS(theta = input$theta_ars, delta = input$delta_ars, tau = input$tau_ars, ars = input$ars_ars, x = input$x_ars, equation = TRUE)[2], "$$\n"
+      )
+    )
+  })
+
+  output$simulation_equation_title1 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations for Data Simulation")
+    )
+  })
+
+  output$simulation_equation_title2 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Equations With Values")
+    )
+  })
+
+  output$simulation_equation_title3 &lt;- renderUI({
+    tags$div(
+      style = "font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;",
+      tags$b("Parameter Distributions")
+    )
+  })
+
+  output$simulation_equation1 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(\\eta^{ERS}_i) \\cdot (\\theta_i - \\delta_j + x_j \\cdot \\eta^{ARS}_i) + \\tau_j}{2})$$\n"
+      )
+    )
+  })
+
+  output$simulation_equation2 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$m_{ij} = exp(\\frac{exp(\\eta^{ERS}_i) \\cdot (\\theta_i - ", input$delta_sim, " + ", input$x_sim, " \\cdot \\eta^{ARS}_i) + ", input$tau_sim, "}{2}),$$\n",
+        "$$n_{ij} = exp(\\frac{-exp(\\eta^{ERS}_i) \\cdot (\\theta_i - ", input$delta_sim, " + ", input$x_sim, " \\cdot \\eta^{ARS}_i) + ", input$tau_sim, "}{2})$$\n"
+      )
+    )
+  })
+
+  output$simulation_equation3 &lt;- renderUI({
+    withMathJax(
+      paste0(
+        "$$\\theta_i \\sim \\mathcal{N}(", input$theta_mu_sim, ", ", input$theta_sd_sim, "),$$\n",
+        "$$\\eta^{ERS}_i \\sim \\mathcal{N}(", input$ers_mu_sim, ", ", input$ers_sd_sim, "),$$\n",
+        "$$\\eta^{ARS}_i \\sim \\mathcal{N}(", input$ars_mu_sim, ", ", input$ars_sd_sim, ")$$\n"
+      )
+    )
+  })
+
+  output$simulation &lt;- renderPlot({
+
+    beta_sample(n = 1000, delta = input$delta_sim, theta_mu = input$theta_mu_sim, theta_sd = input$theta_sd_sim, 
+                tau = input$tau_sim, ars_mu = input$ars_mu_sim, ars_sd = input$ars_sd_sim, 
+                x = input$x_sim, ers_mu = input$ers_mu_sim, ers_sd = input$ers_sd_sim)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+</code></pre>
+</section>
+<section id="pdf-of-the-poster" class="level1">
+<h1>PDF of the Poster</h1>
+<p>Download the Poster PDF</p>
+<!-- -->
+
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Detecting Response Styles in Slider Scales"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Poster Online Materials for the 2025 SMiP Summer School"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: "Dominik Vollbracht"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    email: d.vollbracht@rptu.de</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    - shinylive</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Shiny App</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>*It can take a few seconds (around 10s-30s) to load the app, please be patient.*</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{shinylive-r}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| standalone: true</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| viewerHeight: 1500</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#| viewerWidth: 2000</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ex">library</span><span class="er">(</span><span class="ex">shiny</span><span class="kw">)</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ex">library</span><span class="er">(</span><span class="ex">bslib</span><span class="kw">)</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ex">library</span><span class="er">(</span><span class="ex">shinylive</span><span class="kw">)</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ex">library</span><span class="er">(</span><span class="ex">shinythemes</span><span class="kw">)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ex">beta_normal</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">m</span> = 2, n = 2<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="ex">vals</span> <span class="op">&lt;</span>- dbeta<span class="er">(</span><span class="fu">seq</span><span class="er">(</span><span class="ex">0,</span> 1, by = 0.01<span class="kw">)</span><span class="ex">,</span> m, n<span class="kw">)</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="ex">plot</span><span class="er">(</span><span class="fu">seq</span><span class="er">(</span><span class="ex">0,</span> 1, by = 0.01<span class="kw">)</span><span class="ex">,</span> vals, type = <span class="st">"l"</span>, xlim = c<span class="er">(</span><span class="ex">0,</span> 1<span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>       <span class="ex">xlab</span> = expression<span class="er">(</span><span class="ex">bold</span><span class="er">(</span><span class="va">X</span><span class="op">[</span>ij<span class="op">]</span><span class="kw">))</span><span class="ex">,</span> </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>       <span class="ex">ylab</span> = expression<span class="er">(</span><span class="ex">bold</span><span class="er">(</span><span class="ex">f</span><span class="er">(</span><span class="va">X</span><span class="op">[</span>ij<span class="op">]</span><span class="kw">)))</span><span class="ex">,</span> </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>       <span class="ex">main</span> = bquote<span class="er">(</span><span class="ex">bold</span><span class="er">(</span><span class="st">"Probability Density Function for B("</span> <span class="pp">*</span> .<span class="er">(</span><span class="ex">round</span><span class="er">(</span><span class="ex">m,</span> 2<span class="kw">))</span> <span class="ex">*</span> <span class="st">", "</span> <span class="pp">*</span> .<span class="er">(</span><span class="ex">round</span><span class="er">(</span><span class="ex">n,</span> 2<span class="kw">))</span> <span class="ex">*</span> <span class="st">")"</span><span class="kw">)))</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="ex">BIRM</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">theta,</span> delta, tau, equation = FALSE<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="ex">middle</span> <span class="op">&lt;</span>- theta <span class="at">-</span> delta</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_m</span> <span class="op">&lt;</span>- middle + tau</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_n</span> <span class="op">&lt;</span>- <span class="at">-middle</span> + tau</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="ex">m</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_m</span> / 2<span class="kw">)</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="ex">n</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_n</span> / 2<span class="kw">)</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">(</span><span class="ex">equation</span> == TRUE<span class="kw">)</span> <span class="cf">return</span><span class="kw">(</span><span class="ex">round</span><span class="er">(</span><span class="ex">c</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span><span class="ex">,</span> 2<span class="kw">))</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="ex">beta_normal</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ex">BIRM_ERS</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">theta,</span> delta, tau, ers, equation = FALSE<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="ex">middle</span> <span class="op">&lt;</span>- theta <span class="at">-</span> delta</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="ex">ers_exp</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">ers</span><span class="kw">)</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_m</span> <span class="op">&lt;</span>- ers_exp <span class="pp">*</span> middle + tau</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_n</span> <span class="op">&lt;</span>- <span class="at">-ers_exp</span> <span class="pp">*</span> middle + tau</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="ex">m</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_m</span> / 2<span class="kw">)</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="ex">n</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_n</span> / 2<span class="kw">)</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">(</span><span class="ex">equation</span> == TRUE<span class="kw">)</span> <span class="cf">return</span><span class="kw">(</span><span class="ex">round</span><span class="er">(</span><span class="ex">c</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span><span class="ex">,</span> 2<span class="kw">))</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="ex">beta_normal</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="ex">BIRM_ARS</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">theta,</span> delta, tau, ars, x = 1, equation = FALSE<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="ex">x</span> <span class="op">&lt;</span>- as.numeric<span class="er">(</span><span class="ex">x</span><span class="kw">)</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="ex">middle</span> <span class="op">&lt;</span>- theta <span class="at">-</span> delta + x <span class="pp">*</span> ars</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_m</span> <span class="op">&lt;</span>- middle + tau</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_n</span> <span class="op">&lt;</span>- <span class="at">-middle</span> + tau</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="ex">m</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_m</span> / 2<span class="kw">)</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="ex">n</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_n</span> / 2<span class="kw">)</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">(</span><span class="ex">equation</span> == TRUE<span class="kw">)</span> <span class="cf">return</span><span class="kw">(</span><span class="ex">round</span><span class="er">(</span><span class="ex">c</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span><span class="ex">,</span> 2<span class="kw">))</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="ex">beta_normal</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="ex">BIRM_RS</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">theta,</span> delta, tau, ers, ars, x = 1, equation = FALSE<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="ex">x</span> <span class="op">&lt;</span>- as.numeric<span class="er">(</span><span class="ex">x</span><span class="kw">)</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="ex">middle</span> <span class="op">&lt;</span>- theta <span class="at">-</span> delta + x <span class="pp">*</span> ars</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  <span class="ex">ers_exp</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">ers</span><span class="kw">)</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_m</span> <span class="op">&lt;</span>- ers_exp <span class="pp">*</span> middle + tau</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  <span class="ex">enumerator_n</span> <span class="op">&lt;</span>- <span class="at">-ers_exp</span> <span class="pp">*</span> middle + tau</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="ex">m</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_m</span> / 2<span class="kw">)</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="ex">n</span> <span class="op">&lt;</span>- exp<span class="er">(</span><span class="ex">enumerator_n</span> / 2<span class="kw">)</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">(</span><span class="ex">equation</span> == TRUE<span class="kw">)</span> <span class="cf">return</span><span class="kw">(</span><span class="ex">round</span><span class="er">(</span><span class="ex">c</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span><span class="ex">,</span> 2<span class="kw">))</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>  <span class="ex">beta_normal</span><span class="er">(</span><span class="ex">m,</span> n<span class="kw">)</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="ex">beta_sample</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">n</span> = 1000, delta = 0, theta_mu = 0, theta_sd = 1, tau = 2, ars_mu = 0, ars_sd = 0.5, x = 1, ers_mu = 0, ers_sd = 0.5<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>  <span class="ex">x</span> <span class="op">&lt;</span>- as.numeric<span class="er">(</span><span class="ex">x</span><span class="kw">)</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>  <span class="ex">theta_vals</span> <span class="op">&lt;</span>- rnorm<span class="er">(</span><span class="ex">n,</span> theta_mu, theta_sd<span class="kw">)</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  <span class="ex">ars_vals</span> <span class="op">&lt;</span>- rnorm<span class="er">(</span><span class="ex">n,</span> ars_mu, ars_sd<span class="kw">)</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  <span class="ex">ers_vals</span> <span class="op">&lt;</span>- rnorm<span class="er">(</span><span class="ex">n,</span> ers_mu, ers_sd<span class="kw">)</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  <span class="ex">vec</span> <span class="op">&lt;</span>- NULL</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="kw">(</span><span class="ex">i</span> in 1:n<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmp</span> <span class="op">&lt;</span>- BIRM_RS<span class="er">(</span><span class="ex">theta</span> = theta_vals<span class="pp">[</span><span class="ss">i</span><span class="pp">]</span>, delta = delta, tau = tau, ers = ers_vals<span class="pp">[</span><span class="ss">i</span><span class="pp">]</span>, ars = ars_vals<span class="pp">[</span><span class="ss">i</span><span class="pp">]</span>, x = x, equation = TRUE<span class="kw">)</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    <span class="ex">vec</span> <span class="op">&lt;</span>- c<span class="er">(</span><span class="ex">vec,</span> rbeta<span class="er">(</span><span class="ex">1,</span> tmp<span class="pp">[</span><span class="ss">1</span><span class="pp">]</span>, tmp<span class="pp">[</span><span class="ss">2</span><span class="pp">]</span><span class="kw">))</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  <span class="kw">}</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  <span class="ex">par</span><span class="er">(</span><span class="va">mar</span><span class="op">=</span>c<span class="kw">(</span><span class="ex">5.1,4.5,4.1,2.1</span><span class="kw">))</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  <span class="ex">plot</span><span class="er">(</span><span class="ex">density</span><span class="er">(</span><span class="ex">vec</span><span class="kw">)</span><span class="ex">,</span> main = paste0<span class="er">(</span><span class="st">"Density From Simulated Data (n = "</span><span class="ex">,</span> n, <span class="st">")"</span><span class="kw">)</span><span class="ex">,</span> xlab = expression<span class="er">(</span><span class="ex">bold</span><span class="er">(</span><span class="va">X</span><span class="op">[</span>ij<span class="op">]</span><span class="kw">))</span><span class="ex">,</span> ylab = expression<span class="er">(</span><span class="ex">bold</span><span class="er">(</span><span class="ex">hat</span><span class="er">(</span><span class="ex">f</span><span class="kw">)(</span><span class="va">X</span><span class="op">[</span>ij<span class="op">]</span><span class="kw">))))</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Refactor the UI using navbarPage and nav_panel</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="ex">ui</span> <span class="op">&lt;</span>- navbarPage<span class="er">(</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  <span class="ex">title</span> = <span class="st">"Beta Item Response Theory With Response Styles: Illustration"</span>,</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="ex">theme</span> = shinytheme<span class="er">(</span><span class="st">"cerulean"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Beta Normal Tab</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  <span class="ex">nav_panel</span><span class="er">(</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Standard Beta"</span><span class="ex">,</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sidebarLayout</span><span class="er">(</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>      <span class="ex">sidebarPanel</span><span class="er">(</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Shape Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"m_beta"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(m_{ij}</span><span class="dt">\\</span><span class="st">)"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 10, value = 2, step = 0.5<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"n_beta"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(n_{ij}</span><span class="dt">\\</span><span class="st">)"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 10, value = 2, step = 0.5<span class="kw">)</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mainPanel</span><span class="er">(</span><span class="ex">plotOutput</span><span class="er">(</span><span class="st">"beta_normal"</span><span class="kw">))</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  <span class="co"># BIRM Tab</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  <span class="ex">nav_panel</span><span class="er">(</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BIRM"</span><span class="ex">,</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sidebarLayout</span><span class="er">(</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>      <span class="ex">sidebarPanel</span><span class="er">(</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">))</span><span class="ex">,</span> </span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"theta_birm"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">theta_{i}</span><span class="dt">\\</span><span class="st">): latent trait"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">))</span><span class="ex">,</span> </span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"delta_birm"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">delta_{j}</span><span class="dt">\\</span><span class="st">): item difficulty"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"tau_birm"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 3, value = 2, step = 0.2<span class="kw">)</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mainPanel</span><span class="er">(</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_equation_title1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_equation1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_equation_title2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_equation2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>        <span class="ex">plotOutput</span><span class="er">(</span><span class="st">"BIRM"</span><span class="kw">)</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>  <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ERS Only Tab</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>  <span class="ex">nav_panel</span><span class="er">(</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ERS only"</span><span class="ex">,</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sidebarLayout</span><span class="er">(</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>      <span class="ex">sidebarPanel</span><span class="er">(</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"theta_ers"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">theta_{i}</span><span class="dt">\\</span><span class="st">): latent trait"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ers_ers"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">eta_{i}^{ERS}</span><span class="dt">\\</span><span class="st">): ERS parameter"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-1,</span> max = 1, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">))</span><span class="ex">,</span> </span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"delta_ers"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">delta_{j}</span><span class="dt">\\</span><span class="st">): item difficulty"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"tau_ers"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 3, value = 2, step = 0.2<span class="kw">)</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mainPanel</span><span class="er">(</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ERS_equation_title1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ERS_equation1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ERS_equation_title2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ERS_equation2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>        <span class="ex">plotOutput</span><span class="er">(</span><span class="st">"ERS"</span><span class="kw">)</span></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>  <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ARS Only Tab</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>  <span class="ex">nav_panel</span><span class="er">(</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ARS Only"</span><span class="ex">,</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sidebarLayout</span><span class="er">(</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>      <span class="ex">sidebarPanel</span><span class="er">(</span></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"theta_ars"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">theta_{i}</span><span class="dt">\\</span><span class="st">): latent trait"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ars_ars"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">eta_{i}^{ARS}</span><span class="dt">\\</span><span class="st">): ARS parameter"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-1,</span> max = 1, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"delta_ars"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">delta_{j}</span><span class="dt">\\</span><span class="st">): item difficulty"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"tau_ars"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter"</span><span class="kw">)</span><span class="ex">,</span> min = 0, max = 3, value = 2, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>        <span class="ex">radioButtons</span><span class="er">(</span><span class="st">"x_ars"</span><span class="ex">,</span> label = HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(x_{j}</span><span class="dt">\\</span><span class="st">): item wording"</span><span class="kw">)</span><span class="ex">,</span> selected = 1, choiceNames = c<span class="er">(</span><span class="st">"1: normal-scored"</span><span class="ex">,</span> <span class="st">"-1: reverse-scored"</span><span class="kw">)</span><span class="ex">,</span> choiceValues = c<span class="er">(</span><span class="ex">1,</span> <span class="at">-1</span><span class="kw">))</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mainPanel</span><span class="er">(</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ARS_equation_title1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ARS_equation1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ARS_equation_title2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"ARS_equation2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>        <span class="ex">plotOutput</span><span class="er">(</span><span class="st">"ARS"</span><span class="kw">)</span></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>  <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>  <span class="co"># BIRM-RS Tab</span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>  <span class="ex">nav_panel</span><span class="er">(</span></span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BIRM-RS"</span><span class="ex">,</span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sidebarLayout</span><span class="er">(</span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>      <span class="ex">sidebarPanel</span><span class="er">(</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"theta_birm_rs"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">theta_{i}</span><span class="dt">\\</span><span class="st">): latent trait"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ers_birm_rs"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">eta_{i}^{ERS}</span><span class="dt">\\</span><span class="st">): ERS parameter"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-1,</span> max = 1, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ars_birm_rs"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">eta_{i}^{ARS}</span><span class="dt">\\</span><span class="st">): ARS parameter"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-1,</span> max = 1, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>        <span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"delta_birm_rs"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">delta_{j}</span><span class="dt">\\</span><span class="st">): item difficulty"</span><span class="kw">)</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"tau_birm_rs"</span><span class="ex">,</span> HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter"</span><span class="kw">)</span><span class="ex">,</span> min = 0, max = 3, value = 2, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>        <span class="ex">radioButtons</span><span class="er">(</span><span class="st">"x_birm_rs"</span><span class="ex">,</span> label = HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(x_{j}</span><span class="dt">\\</span><span class="st">): item wording"</span><span class="kw">)</span><span class="ex">,</span> selected = 1, choiceNames = c<span class="er">(</span><span class="st">"1: normal-scored"</span><span class="ex">,</span> <span class="st">"-1: reverse-scored"</span><span class="kw">)</span><span class="ex">,</span> choiceValues = c<span class="er">(</span><span class="ex">1,</span> <span class="at">-1</span><span class="kw">))</span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mainPanel</span><span class="er">(</span></span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_RS_equation_title1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_RS_equation1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_RS_equation_title2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"BIRM_RS_equation2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a>        <span class="ex">plotOutput</span><span class="er">(</span><span class="st">"BIRM_RS"</span><span class="kw">)</span></span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a>  <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>  <span class="co"># BIRM-RS Simulation Tab</span></span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a>  <span class="ex">nav_panel</span><span class="er">(</span></span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BIRM-RS Simulation"</span><span class="ex">,</span></span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>    <span class="ex">sidebarLayout</span><span class="er">(</span></span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a>      <span class="ex">sidebarPanel</span><span class="er">(</span></span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Person Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">))</span><span class="ex">,</span> </span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"theta_mu_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(E(</span><span class="dt">\\</span><span class="st">theta_{i})</span><span class="dt">\\</span><span class="st">): expected value of the latent trait"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"theta_sd_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(SD(</span><span class="dt">\\</span><span class="st">theta_{i})</span><span class="dt">\\</span><span class="st">): standard deviation of the latent trait"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 3, value = 1, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ers_mu_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(E(</span><span class="dt">\\</span><span class="st">eta_{i}^{ERS})</span><span class="dt">\\</span><span class="st">): expected value of the ERS parameter"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-1,</span> max = 1, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ers_sd_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(SD(</span><span class="dt">\\</span><span class="st">eta_{i}^{ERS})</span><span class="dt">\\</span><span class="st">): standard deviation of the ERS parameter"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 1, value = 0.5, step = 0.1<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ars_mu_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(E(</span><span class="dt">\\</span><span class="st">eta_{i}^{ARS})</span><span class="dt">\\</span><span class="st">): expected value of the ARS parameter"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-1,</span> max = 1, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"ars_sd_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(SD(</span><span class="dt">\\</span><span class="st">eta_{i}^{ARS})</span><span class="dt">\\</span><span class="st">): standard deviation of the ARS parameter"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 1, value = 0.5, step = 0.1<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>        <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"&lt;h4&gt;&lt;b&gt;Item Parameters&lt;/b&gt;&lt;/h4&gt;"</span><span class="kw">))</span><span class="ex">,</span> </span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"delta_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">delta_{j}</span><span class="dt">\\</span><span class="st">): item difficulty"</span><span class="kw">))</span><span class="ex">,</span> min = <span class="at">-3,</span> max = 3, value = 0, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span><span class="st">"tau_sim"</span><span class="ex">,</span> withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter"</span><span class="kw">))</span><span class="ex">,</span> min = 0, max = 3, value = 2, step = 0.2<span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>        <span class="ex">radioButtons</span><span class="er">(</span><span class="st">"x_sim"</span><span class="ex">,</span> label = withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">( x_{j} </span><span class="dt">\\</span><span class="st">): item wording"</span><span class="kw">))</span><span class="ex">,</span> selected = 1, choiceNames = c<span class="er">(</span><span class="st">"1: normal-scored"</span><span class="ex">,</span> <span class="st">"-1: reverse-scored"</span><span class="kw">)</span><span class="ex">,</span> choiceValues = c<span class="er">(</span><span class="ex">1,</span> <span class="at">-1</span><span class="kw">))</span></span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>      <span class="ex">mainPanel</span><span class="er">(</span></span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"simulation_equation_title1"</span><span class="kw">)</span><span class="ex">,</span> </span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"simulation_equation1"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"simulation_equation_title2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"simulation_equation2"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"simulation_equation_title3"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>        <span class="ex">uiOutput</span><span class="er">(</span><span class="st">"simulation_equation3"</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>        <span class="ex">plotOutput</span><span class="er">(</span><span class="st">"simulation"</span><span class="kw">))</span></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>  <span class="kw">)</span></span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> <span class="op">&lt;</span>- function<span class="er">(</span><span class="ex">input,</span> output<span class="kw">)</span> <span class="kw">{</span></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$beta_normal</span> <span class="op">&lt;</span>- renderPlot<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>    <span class="ex">beta_normal</span><span class="er">(</span><span class="ex">m</span> = input<span class="va">$m_beta</span>, n = input<span class="va">$n_beta</span><span class="kw">)</span></span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM</span> <span class="op">&lt;</span>- renderPlot<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>    <span class="ex">BIRM</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_birm</span>, delta = input<span class="va">$delta_birm</span>, tau = input<span class="va">$tau_birm</span><span class="kw">)</span></span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>  <span class="co"># let us do equation1 and equation2 for BIRM and then delete the old equation</span></span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_equation_title1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations for the Probability Density Function"</span><span class="kw">)</span></span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_equation_title2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations With Values"</span><span class="kw">)</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_equation1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + </span><span class="dt">\\</span><span class="st">tau_j}{2}),</span><span class="va">$$</span><span class="st">\n"</span><span class="ex">,</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-(</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j) + </span><span class="dt">\\</span><span class="st">tau_j}{2})</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_equation2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{"</span><span class="ex">,</span> input<span class="va">$theta_birm</span>, <span class="st">" - "</span>, input<span class="va">$delta_birm</span>, <span class="st">" + "</span>, input<span class="va">$tau_birm</span>, <span class="st">"}{2}) = "</span>, </span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_birm</span>, delta = input<span class="va">$delta_birm</span>, tau = input<span class="va">$tau_birm</span>, equation = TRUE<span class="kw">)</span><span class="ex">[1],</span> <span class="st">",</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-("</span><span class="ex">,</span> input<span class="va">$theta_birm</span>, <span class="st">" - "</span>, input<span class="va">$delta_birm</span>, <span class="st">") + "</span>, input<span class="va">$tau_birm</span>, <span class="st">"}{2}) = "</span>,</span>
+<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_birm</span>, delta = input<span class="va">$delta_birm</span>, tau = input<span class="va">$tau_birm</span>, equation = TRUE<span class="kw">)</span><span class="ex">[2],</span> <span class="st">"</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_RS_equation_title1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations for the Probability Density Function"</span><span class="kw">)</span></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_RS_equation_title2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations With Values"</span><span class="kw">)</span></span>
+<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_RS</span> <span class="op">&lt;</span>- renderPlot<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>    <span class="ex">BIRM_RS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_birm_rs</span>, delta = input<span class="va">$delta_birm_rs</span>, tau = input<span class="va">$tau_birm_rs</span>, </span>
+<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>            <span class="ex">ars</span> = input<span class="va">$ars_birm_rs</span>, x = input<span class="va">$x_birm_rs</span>, ers = input<span class="va">$ers_birm_rs</span><span class="kw">)</span></span>
+<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_RS_equation1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + x_j </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + </span><span class="dt">\\</span><span class="st">tau_j}{2}),</span><span class="va">$$</span><span class="st">\n"</span><span class="ex">,</span></span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + x_j </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + </span><span class="dt">\\</span><span class="st">tau_j}{2})</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$BIRM_RS_equation2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{exp("</span><span class="ex">,</span> input<span class="va">$ers_birm_rs</span>, <span class="st">") </span><span class="dt">\\</span><span class="st">cdot ("</span>, input<span class="va">$theta_birm_rs</span>, <span class="st">" - "</span>, input<span class="va">$delta_birm_rs</span>, <span class="st">" + "</span>, input<span class="va">$x_birm_rs</span>, <span class="st">" </span><span class="dt">\\</span><span class="st">cdot "</span>, input<span class="va">$ars_birm_rs</span>, <span class="st">") + "</span>, input<span class="va">$tau_birm_rs</span>, <span class="st">"}{2}) = "</span>,</span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM_RS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_birm_rs</span>, delta = input<span class="va">$delta_birm_rs</span>, tau = input<span class="va">$tau_birm_rs</span>, </span>
+<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a>                <span class="ex">ars</span> = input<span class="va">$ars_birm_rs</span>, x = input<span class="va">$x_birm_rs</span>, ers = input<span class="va">$ers_birm_rs</span>, equation = TRUE<span class="kw">)</span><span class="ex">[1],</span> <span class="st">",</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-exp("</span><span class="ex">,</span> input<span class="va">$ers_birm_rs</span>, <span class="st">") </span><span class="dt">\\</span><span class="st">cdot ("</span>, input<span class="va">$theta_birm_rs</span>, <span class="st">" - "</span>, input<span class="va">$delta_birm_rs</span>, <span class="st">" + "</span>, input<span class="va">$x_birm_rs</span>, <span class="st">" </span><span class="dt">\\</span><span class="st">cdot "</span>, input<span class="va">$ars_birm_rs</span>, <span class="st">") + "</span>, input<span class="va">$tau_birm_rs</span>, <span class="st">"}{2}) = "</span>,</span>
+<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM_RS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_birm_rs</span>, delta = input<span class="va">$delta_birm_rs</span>, tau = input<span class="va">$tau_birm_rs</span>, </span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>                <span class="ex">ars</span> = input<span class="va">$ars_birm_rs</span>, x = input<span class="va">$x_birm_rs</span>, ers = input<span class="va">$ers_birm_rs</span>, equation = TRUE<span class="kw">)</span><span class="ex">[2],</span> <span class="st">"</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ERS</span> <span class="op">&lt;</span>- renderPlot<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>    <span class="ex">BIRM_ERS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_ers</span>, delta = input<span class="va">$delta_ers</span>, tau = input<span class="va">$tau_ers</span>, ers = input<span class="va">$ers_ers</span><span class="kw">)</span></span>
+<span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ERS_equation_title1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations for the Probability Density Function"</span><span class="kw">)</span></span>
+<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ERS_equation_title2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations With Values"</span><span class="kw">)</span></span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a>  <span class="co"># modify the equation to split it (1 and 2)</span></span>
+<span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ERS_equation1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j) + </span><span class="dt">\\</span><span class="st">tau_j}{2}),</span><span class="va">$$</span><span class="st">\n"</span><span class="ex">,</span></span>
+<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j) + </span><span class="dt">\\</span><span class="st">tau_j}{2})</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ERS_equation2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-359"><a href="#cb2-359" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-360"><a href="#cb2-360" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{exp("</span><span class="ex">,</span> input<span class="va">$ers_ers</span>, <span class="st">") </span><span class="dt">\\</span><span class="st">cdot ("</span>, input<span class="va">$theta_ers</span>, <span class="st">" - "</span>, input<span class="va">$delta_ers</span>, <span class="st">") + "</span>, input<span class="va">$tau_ers</span>, <span class="st">"}{2}) = "</span>, </span>
+<span id="cb2-361"><a href="#cb2-361" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM_ERS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_ers</span>, delta = input<span class="va">$delta_ers</span>, tau = input<span class="va">$tau_ers</span>, ers = input<span class="va">$ers_ers</span>, equation = TRUE<span class="kw">)</span><span class="ex">[1],</span> <span class="st">",</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-exp("</span><span class="ex">,</span> input<span class="va">$ers_ers</span>, <span class="st">") </span><span class="dt">\\</span><span class="st">cdot ("</span>, input<span class="va">$theta_ers</span>, <span class="st">" - "</span>, input<span class="va">$delta_ers</span>, <span class="st">") + "</span>, input<span class="va">$tau_ers</span>, <span class="st">"}{2}) = "</span>,</span>
+<span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM_ERS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_ers</span>, delta = input<span class="va">$delta_ers</span>, tau = input<span class="va">$tau_ers</span>, ers = input<span class="va">$ers_ers</span>, equation = TRUE<span class="kw">)</span><span class="ex">[2],</span> <span class="st">"</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ARS</span> <span class="op">&lt;</span>- renderPlot<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a>    <span class="ex">BIRM_ARS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_ars</span>, delta = input<span class="va">$delta_ars</span>, tau = input<span class="va">$tau_ars</span>, ars = input<span class="va">$ars_ars</span>, x = input<span class="va">$x_ars</span><span class="kw">)</span></span>
+<span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ARS_equation_title1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-374"><a href="#cb2-374" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations for the Probability Density Function"</span><span class="kw">)</span></span>
+<span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-379"><a href="#cb2-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ARS_equation_title2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations With Values"</span><span class="kw">)</span></span>
+<span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ARS_equation1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{(</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + x_j </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + </span><span class="dt">\\</span><span class="st">tau_j}{2}),</span><span class="va">$$</span><span class="st">\n"</span><span class="ex">,</span></span>
+<span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-(</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + x_j </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + </span><span class="dt">\\</span><span class="st">tau_j}{2})</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-393"><a href="#cb2-393" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-395"><a href="#cb2-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$ARS_equation2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{("</span><span class="ex">,</span> input<span class="va">$theta_ars</span>, <span class="st">" - "</span>, input<span class="va">$delta_ars</span>, <span class="st">" + "</span>, input<span class="va">$x_ars</span>, <span class="st">" </span><span class="dt">\\</span><span class="st">cdot "</span>, input<span class="va">$ars_ars</span>, <span class="st">") + "</span>, input<span class="va">$tau_ars</span>, <span class="st">"}{2}) = "</span>, </span>
+<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM_ARS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_ars</span>, delta = input<span class="va">$delta_ars</span>, tau = input<span class="va">$tau_ars</span>, ars = input<span class="va">$ars_ars</span>, x = input<span class="va">$x_ars</span>, equation = TRUE<span class="kw">)</span><span class="ex">[1],</span> <span class="st">",</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-("</span><span class="ex">,</span> input<span class="va">$theta_ars</span>, <span class="st">" - "</span>, input<span class="va">$delta_ars</span>, <span class="st">" + "</span>, input<span class="va">$x_ars</span>, <span class="st">" </span><span class="dt">\\</span><span class="st">cdot "</span>, input<span class="va">$ars_ars</span>, <span class="st">") + "</span>, input<span class="va">$tau_ars</span>, <span class="st">"}{2}) = "</span>,</span>
+<span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a>        <span class="ex">BIRM_ARS</span><span class="er">(</span><span class="ex">theta</span> = input<span class="va">$theta_ars</span>, delta = input<span class="va">$delta_ars</span>, tau = input<span class="va">$tau_ars</span>, ars = input<span class="va">$ars_ars</span>, x = input<span class="va">$x_ars</span>, equation = TRUE<span class="kw">)</span><span class="ex">[2],</span> <span class="st">"</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation_equation_title1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations for Data Simulation"</span><span class="kw">)</span></span>
+<span id="cb2-411"><a href="#cb2-411" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation_equation_title2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-416"><a href="#cb2-416" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-417"><a href="#cb2-417" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Equations With Values"</span><span class="kw">)</span></span>
+<span id="cb2-418"><a href="#cb2-418" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-419"><a href="#cb2-419" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-420"><a href="#cb2-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-421"><a href="#cb2-421" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation_equation_title3</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-422"><a href="#cb2-422" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tags</span><span class="va">$div</span><span class="er">(</span></span>
+<span id="cb2-423"><a href="#cb2-423" aria-hidden="true" tabindex="-1"></a>      <span class="ex">style</span> = <span class="st">"font-weight: bold; font-size: 14px; font-family: sans-serif; text-align: center;"</span>,</span>
+<span id="cb2-424"><a href="#cb2-424" aria-hidden="true" tabindex="-1"></a>      <span class="ex">tags</span><span class="va">$b</span><span class="er">(</span><span class="st">"Parameter Distributions"</span><span class="kw">)</span></span>
+<span id="cb2-425"><a href="#cb2-425" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-426"><a href="#cb2-426" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-427"><a href="#cb2-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-428"><a href="#cb2-428" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation_equation1</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-429"><a href="#cb2-429" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-430"><a href="#cb2-430" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-431"><a href="#cb2-431" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + x_j </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + </span><span class="dt">\\</span><span class="st">tau_j}{2}),</span><span class="va">$$</span><span class="st">\n"</span><span class="ex">,</span></span>
+<span id="cb2-432"><a href="#cb2-432" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - </span><span class="dt">\\</span><span class="st">delta_j + x_j </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + </span><span class="dt">\\</span><span class="st">tau_j}{2})</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-433"><a href="#cb2-433" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-434"><a href="#cb2-434" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-435"><a href="#cb2-435" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-436"><a href="#cb2-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-437"><a href="#cb2-437" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation_equation2</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-438"><a href="#cb2-438" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-439"><a href="#cb2-439" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-440"><a href="#cb2-440" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">m_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - "</span><span class="ex">,</span> input<span class="va">$delta_sim</span>, <span class="st">" + "</span>, input<span class="va">$x_sim</span>, <span class="st">" </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + "</span>, input<span class="va">$tau_sim</span>, <span class="st">"}{2}),</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-441"><a href="#cb2-441" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="st">n_{ij} = exp(</span><span class="dt">\\</span><span class="st">frac{-exp(</span><span class="dt">\\</span><span class="st">eta^{ERS}_i) </span><span class="dt">\\</span><span class="st">cdot (</span><span class="dt">\\</span><span class="st">theta_i - "</span><span class="ex">,</span> input<span class="va">$delta_sim</span>, <span class="st">" + "</span>, input<span class="va">$x_sim</span>, <span class="st">" </span><span class="dt">\\</span><span class="st">cdot </span><span class="dt">\\</span><span class="st">eta^{ARS}_i) + "</span>, input<span class="va">$tau_sim</span>, <span class="st">"}{2})</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-442"><a href="#cb2-442" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-443"><a href="#cb2-443" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-444"><a href="#cb2-444" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-445"><a href="#cb2-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-446"><a href="#cb2-446" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation_equation3</span> <span class="op">&lt;</span>- renderUI<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-447"><a href="#cb2-447" aria-hidden="true" tabindex="-1"></a>    <span class="ex">withMathJax</span><span class="er">(</span></span>
+<span id="cb2-448"><a href="#cb2-448" aria-hidden="true" tabindex="-1"></a>      <span class="ex">paste0</span><span class="er">(</span></span>
+<span id="cb2-449"><a href="#cb2-449" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="dt">\\</span><span class="st">theta_i </span><span class="dt">\\</span><span class="st">sim </span><span class="dt">\\</span><span class="st">mathcal{N}("</span><span class="ex">,</span> input<span class="va">$theta_mu_sim</span>, <span class="st">", "</span>, input<span class="va">$theta_sd_sim</span>, <span class="st">"),</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-450"><a href="#cb2-450" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="dt">\\</span><span class="st">eta^{ERS}_i </span><span class="dt">\\</span><span class="st">sim </span><span class="dt">\\</span><span class="st">mathcal{N}("</span><span class="ex">,</span> input<span class="va">$ers_mu_sim</span>, <span class="st">", "</span>, input<span class="va">$ers_sd_sim</span>, <span class="st">"),</span><span class="va">$$</span><span class="st">\n"</span>,</span>
+<span id="cb2-451"><a href="#cb2-451" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$$</span><span class="dt">\\</span><span class="st">eta^{ARS}_i </span><span class="dt">\\</span><span class="st">sim </span><span class="dt">\\</span><span class="st">mathcal{N}("</span><span class="ex">,</span> input<span class="va">$ars_mu_sim</span>, <span class="st">", "</span>, input<span class="va">$ars_sd_sim</span>, <span class="st">")</span><span class="va">$$</span><span class="st">\n"</span></span>
+<span id="cb2-452"><a href="#cb2-452" aria-hidden="true" tabindex="-1"></a>      <span class="kw">)</span></span>
+<span id="cb2-453"><a href="#cb2-453" aria-hidden="true" tabindex="-1"></a>    <span class="kw">)</span></span>
+<span id="cb2-454"><a href="#cb2-454" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-455"><a href="#cb2-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-456"><a href="#cb2-456" aria-hidden="true" tabindex="-1"></a>  <span class="ex">output</span><span class="va">$simulation</span> <span class="op">&lt;</span>- renderPlot<span class="er">(</span><span class="kw">{</span></span>
+<span id="cb2-457"><a href="#cb2-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-458"><a href="#cb2-458" aria-hidden="true" tabindex="-1"></a>    <span class="ex">beta_sample</span><span class="er">(</span><span class="ex">n</span> = 1000, delta = input<span class="va">$delta_sim</span>, theta_mu = input<span class="va">$theta_mu_sim</span>, theta_sd = input<span class="va">$theta_sd_sim</span>, </span>
+<span id="cb2-459"><a href="#cb2-459" aria-hidden="true" tabindex="-1"></a>                <span class="ex">tau</span> = input<span class="va">$tau_sim</span>, ars_mu = input<span class="va">$ars_mu_sim</span>, ars_sd = input<span class="va">$ars_sd_sim</span>, </span>
+<span id="cb2-460"><a href="#cb2-460" aria-hidden="true" tabindex="-1"></a>                <span class="ex">x</span> = input<span class="va">$x_sim</span>, ers_mu = input<span class="va">$ers_mu_sim</span>, ers_sd = input<span class="va">$ers_sd_sim</span><span class="kw">)</span></span>
+<span id="cb2-461"><a href="#cb2-461" aria-hidden="true" tabindex="-1"></a>  <span class="kw">})</span></span>
+<span id="cb2-462"><a href="#cb2-462" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb2-463"><a href="#cb2-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-464"><a href="#cb2-464" aria-hidden="true" tabindex="-1"></a><span class="ex">shinyApp</span><span class="er">(</span><span class="ex">ui</span> = ui, server = server<span class="kw">)</span></span>
+<span id="cb2-465"><a href="#cb2-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-466"><a href="#cb2-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-467"><a href="#cb2-467" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-468"><a href="#cb2-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-469"><a href="#cb2-469" aria-hidden="true" tabindex="-1"></a><span class="fu"># PDF of the Poster</span></span>
+<span id="cb2-470"><a href="#cb2-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-471"><a href="#cb2-471" aria-hidden="true" tabindex="-1"></a>Download the Poster PDF</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
