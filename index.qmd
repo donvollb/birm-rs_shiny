@@ -15,6 +15,33 @@ format:
 
 # Shiny App
 
+## General Explanation
+
+This app illustrates the Beta Item Response Model (BIRM) with and without response styles (RS). It allows you to visualize how different parameters affect the probability density function of the model. The app is divided into several tabs, each focusing on a specific aspect of the BIRM and response styles.
+
+The probability density funcions show the distribution of responses for a given person and item combination, represented by the indices $i$ and $j$. The indexes used in the model are:
+
+**Index $i$**: Represents the person index in the model.
+
+**Index $j$**: Represents the item index in the model.
+
+
+## Tabs
+
+**Standard Beta**: Visualizes the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This is helpful for understanding the basic properties of beta distributions.
+
+**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to visualize how these parameters affect the probability density function of the model. This is the base model by Noel & Dauvier (2009) we extended.
+
+**ERS only**: Shows the BIRM with an additional ERS parameter ($\eta^{ERS}_{i}$). This tab allows you to visualize the effect of the ERS parameter on the probability density function. 
+
+**ARS only**: Displays the BIRM with an additional ARS parameter ($\eta^{ARS}_{i}$) and effect-coded item wording ($x_j$). This tab allows you to visualize how the ARS parameter and item wording affect the probability density function. 
+
+**BIRM-RS**: Combines the ERS and ARS parameters in the BIRM, allowing you to visualize both two response styles and their effects on the probability density function.
+
+**BIRM-RS Simulation**: Simulates data based on the BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density function from the simulated data. This is useful for understanding how the model behaves in a sample.
+
+## App
+
 *It can take a few seconds (around 10s-30s) to load the app, please be patient.*
 
 ```{shinylive-r}
@@ -85,13 +112,12 @@ beta_sample <- function(n = 1000, delta = 0, theta_mu = 0, theta_sd = 1, tau = 2
   ars_vals <- rnorm(n, ars_mu, ars_sd)
   ers_vals <- rnorm(n, ers_mu, ers_sd)
 
-  vec <- NULL
-
-  for (i in 1:n) {
-    tmp <- BIRM_RS(theta = theta_vals[i], delta = delta, tau = tau, ers = ers_vals[i], ars = ars_vals[i], x = x, equation = TRUE)
-    vec <- c(vec, rbeta(1, tmp[1], tmp[2]))
-  }
+  # do the above vectorized
+  tmp <- sapply(1:n, function(i) BIRM_RS(theta = theta_vals[i], delta = delta, tau = tau, ers = ers_vals[i], ars = ars_vals[i], x = x, equation = TRUE)) |>
+    t() |> as.data.frame()
   
+  vec <- rbeta(n, tmp[, 1], tmp[, 2])
+
   par(mar=c(5.1,4.5,4.1,2.1))
 
   plot(density(vec), main = paste0("Density From Simulated Data (n = ", n, ")"), xlab = expression(bold(X[ij])), ylab = expression(bold(hat(f)(X[ij]))))
