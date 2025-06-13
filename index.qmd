@@ -13,6 +13,8 @@ format:
 ---
 
 
+**Download the Poster PDF**: Poster.pdf
+
 # Shiny App
 
 ## General Explanation
@@ -57,8 +59,8 @@ library(shinythemes)
 beta_normal <- function(m = 2, n = 2) {
   vals <- dbeta(seq(0, 1, by = 0.01), m, n)
   plot(seq(0, 1, by = 0.01), vals, type = "l", xlim = c(0, 1), 
-       xlab = expression(bold(X[ij])), 
-       ylab = expression(bold(f(X[ij]))), 
+       xlab = expression(bold(Y[ij])), 
+       ylab = expression(bold(f(Y[ij]))), 
        main = bquote(bold("Probability Density Function for B(" * .(round(m, 2)) * ", " * .(round(n, 2)) * ")")))
 }
 
@@ -120,7 +122,7 @@ beta_sample <- function(n = 1000, delta = 0, theta_mu = 0, theta_sd = 1, tau = 2
 
   par(mar=c(5.1,4.5,4.1,2.1))
 
-  plot(density(vec), main = paste0("Density From Simulated Data (n = ", n, ")"), xlab = expression(bold(X[ij])), ylab = expression(bold(hat(f)(X[ij]))))
+  plot(density(vec), main = paste0("Density From Simulated Data (n = ", n, ")"), xlab = expression(bold(Y[ij])), ylab = expression(bold(f(hat(Y)[ij]))))
 }
 
 
@@ -492,6 +494,3 @@ shinyApp(ui = ui, server = server)
 
 ```
 
-# PDF of the Poster
-
-Download the Poster PDF
