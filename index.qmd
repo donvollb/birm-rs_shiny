@@ -10,7 +10,6 @@ format:
   html:
     toc: true
     code-tools: true
-    embed-resources: false
 ---
 
 
