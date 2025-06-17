@@ -78,22 +78,23 @@ plot_demo <- function(vals1, vals2, vals3, leg_labels = c("0", "Positive", "Nega
     coord_cartesian(xlim = c(0, 1), ylim = c(0, 2.5)) +
     labs(
       x     = expression(bold(Response ~ Y[ij])),
-      y     = expression(bold(Probability ~ Density ~ f(Y[ij]))),
+      # y     = expression(bold(Probability ~ Density ~ f(Y[ij]))),
+      y     = expression(bold(Probability ~ Density)),
       colour = ""
     ) +
-    theme_bw(base_size = 18) + 
+    theme_bw(base_size = 23) + 
     theme(legend.position = "none",
       panel.background  = element_rect(fill = "transparent", colour = NA),
       plot.background   = element_rect(fill = "transparent", colour = NA)) 
 }
 
-plot_emf <- function(filename, vals1, vals2, vals3, width = 12.46, height = 9.93, unit = "cm") {
-  p <- plot_demo(vals1, vals2, vals3)
+plot_emf <- function(p, filename, width = 12.46, height = 9.93, unit = "cm") {
   ggsave(
     filename = filename,
     plot     = p,
-    device   = function(file, ...) devEMF::emf(file = file, ...),
-    width    = width, height = height, units = unit
+    device   = function(file, ...) devEMF::emf(file = file, family = "Calibri", emfPlusFontToPath = TRUE, ...),
+    width    = width, height = height, units = unit,
+    dpi      = 300  
   )
 }
 
@@ -103,38 +104,45 @@ plot_emf <- function(filename, vals1, vals2, vals3, width = 12.46, height = 9.93
 vals1 <- BIRM_RS(theta = 0)
 vals2 <- BIRM_RS(theta = 1)
 vals3 <- BIRM_RS(theta = -1)
-plot_demo(vals1, vals2, vals3)
-# plot_emf("theta.emf", vals1, vals2, vals3)
+p <- plot_demo(vals1, vals2, vals3)
+p
+plot_emf(p, "plots/theta.emf")
 
 # DELTA
 vals1 <- BIRM_RS(delta = 0)
 vals2 <- BIRM_RS(delta = 1)
 vals3 <- BIRM_RS(delta = -1)
-plot_demo(vals1, vals2, vals3)
-# plot_emf("delta.emf", vals1, vals2, vals3)
+plot_demo(vals1, vals2, vals3) -> p
+p
+plot_emf(p, "plots/delta.emf")
 
 # ERS
 vals1 <- BIRM_RS(theta = 0.5, ers = 0)
 vals2 <- BIRM_RS(theta = 0.5, ers = 0.7)
 vals3 <- BIRM_RS(theta = 0.5, ers = -0.7)
 
-plot_demo(vals1, vals2, vals3)
-# plot_emf("ers.emf", vals1, vals2, vals3)
+plot_demo(vals1, vals2, vals3) -> p
+p
+plot_emf(p, "plots/ers.emf")
 
 # ARS and X (identical)
 vals1 <- BIRM_RS(ars = 0)
 vals2 <- BIRM_RS(ars = 0.5)
 vals3 <- BIRM_RS(ars = -0.5)
 
-plot_demo(vals1, vals2, vals3)
-# plot_emf("ars_x.emf", vals1, vals2, vals3)
+plot_demo(vals1, vals2, vals3) -> p
+p
+plot_emf(p, "plots/ars_x.emf")
+
 
 # TAU
 vals1 <- BIRM_RS(tau = 2)
 vals2 <- BIRM_RS(tau = 2.5)
 vals3 <- BIRM_RS(tau = 1.5)
 
-plot_demo(vals1, vals2, vals3)
-# plot_emf("tau.emf", vals1, vals2, vals3)
+plot_demo(vals1, vals2, vals3) -> p
+p
+plot_emf(p, "plots/tau.emf")
+
 
 
