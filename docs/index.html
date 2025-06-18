@@ -159,22 +159,22 @@ window.Quarto = {
 <section id="general-explanation" class="level2">
 <h2 class="anchored" data-anchor-id="general-explanation">General Explanation</h2>
 <p>This app illustrates the Beta Item Response Model (BIRM) with and without response styles (RS). It allows you to visualize how different parameters affect the probability density function (PDF) of the model. The app is divided into several tabs, each focusing on a specific aspect of the BIRM and response styles.</p>
-<p>The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices <span class="math display">\[i\]</span> (person) and <span class="math display">\[j\]</span> (item):</p>
+<p>The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices <span class="math inline">\(i\)</span> (person) and <span class="math inline">\(j\)</span> (item):</p>
 <ul>
-<li><strong>Index <span class="math display">\[i\]</span></strong>: Represents a person in the model.<br>
+<li><strong>Index <span class="math inline">\(i\)</span></strong>: Represents a person in the model.<br>
 </li>
-<li><strong>Index <span class="math display">\[j\]</span></strong>: Represents an item in the model.</li>
+<li><strong>Index <span class="math inline">\(j\)</span></strong>: Represents an item in the model.</li>
 </ul>
 <hr>
 </section>
 <section id="tabs" class="level2">
 <h2 class="anchored" data-anchor-id="tabs">Tabs</h2>
-<p><strong>Standard Beta</strong>: Displays the probability density function of a standard beta distribution with shape parameters <span class="math display">\[m_{ij}\]</span> and <span class="math display">\[n_{ij}\]</span>. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as slider-scale responses.</p>
-<p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math display">\[\theta_i\]</span>) and item parameters (<span class="math display">\[\delta_j\]</span>, <span class="math display">\[\tau_j\]</span>). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by Noël &amp; Dauvier (2009), which we extend in the subsequent tabs.</p>
-<p><strong>ERS only</strong>: Shows the BIRM with an additional extreme response style (ERS) parameter (<span class="math display">\[\eta^{ERS}_{i}\]</span>). This tab allows you to examine how ERS influences the shape and location of the probability density function.</p>
-<p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math display">\[\eta^{ARS}_{i}\]</span>) and effect-coded item wording (<span class="math display">\[x_j\]</span>). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</p>
+<p><strong>Standard Beta</strong>: Displays the probability density function of a standard beta distribution with shape parameters <span class="math inline">\(m_{ij}\)</span> and <span class="math inline">\(n_{ij}\)</span>. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as slider-scale responses.</p>
+<p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math inline">\(\theta_i\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by Noël &amp; Dauvier (2009), which we extend in the subsequent tabs.</p>
+<p><strong>ERS only</strong>: Shows the BIRM with an additional extreme response style (ERS) parameter (<span class="math inline">\(\eta^{ERS}_{i}\)</span>). This tab allows you to examine how ERS influences the shape and location of the probability density function.</p>
+<p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math inline">\(\eta^{ARS}_{i}\)</span>) and effect-coded item wording (<span class="math inline">\(x_j\)</span>). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</p>
 <p><strong>BIRM-RS</strong>: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</p>
-<p><strong>BIRM-RS Simulation</strong>: Simulates data based on the full BIRM-RS model. It generates random values for person parameters (<span class="math display">\[\theta_i\]</span>, <span class="math display">\[\eta^{ERS}_{i}\]</span>, <span class="math display">\[\eta^{ARS}_{i}\]</span>) and item parameters (<span class="math display">\[\delta_j\]</span>, <span class="math display">\[\tau_j\]</span>), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</p>
+<p><strong>BIRM-RS Simulation</strong>: Simulates data based on the full BIRM-RS model. It generates random values for person parameters (<span class="math inline">\(\theta_i\)</span>, <span class="math inline">\(\eta^{ERS}_{i}\)</span>, <span class="math inline">\(\eta^{ARS}_{i}\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</p>
 <hr>
 </section>
 <section id="app" class="level2">
@@ -1572,26 +1572,26 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>This app illustrates the Beta Item Response Model (BIRM) with and without response styles (RS). It allows you to visualize how different parameters affect the probability density function (PDF) of the model. The app is divided into several tabs, each focusing on a specific aspect of the BIRM and response styles.</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices $$i$$ (person) and $$j$$ (item):</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices $i$ (person) and $j$ (item):</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Index $$i$$**: Represents a person in the model.  </span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Index $$j$$**: Represents an item in the model.</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Index $i$**: Represents a person in the model.  </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Index $j$**: Represents an item in the model.</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tabs</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>**Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $$m_{ij}$$ and $$n_{ij}$$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>, making it well-suited for modeling bounded continuous data, such as slider-scale responses.</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>**Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>, making it well-suited for modeling bounded continuous data, such as slider-scale responses.</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($$\theta_i$$) and item parameters ($$\delta_j$$, $$\tau_j$$). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by Noël &amp; Dauvier (2009), which we extend in the subsequent tabs.</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by Noël &amp; Dauvier (2009), which we extend in the subsequent tabs.</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>**ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($$\eta^{ERS}_{i}$$). This tab allows you to examine how ERS influences the shape and location of the probability density function.</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>**ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>**ARS only**: Displays the BIRM with an acquiescence response style (ARS) parameter ($$\eta^{ARS}_{i}$$) and effect-coded item wording ($$x_j$$). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>**ARS only**: Displays the BIRM with an acquiescence response style (ARS) parameter ($\eta^{ARS}_{i}$) and effect-coded item wording ($x_j$). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>**BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>**BIRM-RS Simulation**: Simulates data based on the full BIRM-RS model. It generates random values for person parameters ($$\theta_i$$, $$\eta^{ERS}_{i}$$, $$\eta^{ARS}_{i}$$) and item parameters ($$\delta_j$$, $$\tau_j$$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>**BIRM-RS Simulation**: Simulates data based on the full BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
