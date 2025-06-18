@@ -27,7 +27,6 @@ The probability density functions represent the distribution of responses for a 
 - **Index $i$**: Represents a person in the model.  
 - **Index $j$**: Represents an item in the model.
 
----
 
 ## Tabs
 
@@ -42,8 +41,6 @@ The probability density functions represent the distribution of responses for a 
 **BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.
 
 **BIRM-RS Simulation**: Simulates data based on the full BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.
-
----
 
 ## App
 
