@@ -14,7 +14,9 @@ embed-resources: false
 ---
 
 
-**Download the Poster PDF**: Poster.pdf
+#  Download
+
+[Download the Poster PDF](docs/poster.pdf){download="poster.pdf" .btn .btn-primary}
 
 # Shiny App
 
