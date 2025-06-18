@@ -122,6 +122,7 @@ window.Quarto = {
   <li><a href="#tabs" id="toc-tabs" class="nav-link" data-scroll-target="#tabs">Tabs</a></li>
   <li><a href="#app" id="toc-app" class="nav-link" data-scroll-target="#app">App</a></li>
   </ul></li>
+  <li><a href="#sec-reference" id="toc-sec-reference" class="nav-link" data-scroll-target="#sec-reference">Reference</a></li>
   </ul>
 </nav>
 </div>
@@ -169,7 +170,7 @@ window.Quarto = {
 <section id="tabs" class="level2">
 <h2 class="anchored" data-anchor-id="tabs">Tabs</h2>
 <p><strong>Standard Beta</strong>: Displays the probability density function of a standard beta distribution with shape parameters <span class="math inline">\(m_{ij}\)</span> and <span class="math inline">\(n_{ij}\)</span>. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as slider-scale responses.</p>
-<p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math inline">\(\theta_i\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by Noël &amp; Dauvier (2009), which we extend in the subsequent tabs.</p>
+<p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math inline">\(\theta_i\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by <a href="#sec-reference">Noel &amp; Dauvier (2009)</a>, which we extend in the subsequent tabs.</p>
 <p><strong>ERS only</strong>: Shows the BIRM with an additional extreme response style (ERS) parameter (<span class="math inline">\(\eta^{ERS}_{i}\)</span>). This tab allows you to examine how ERS influences the shape and location of the probability density function.</p>
 <p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math inline">\(\eta^{ARS}_{i}\)</span>) and effect-coded item wording (<span class="math inline">\(x_j\)</span>). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</p>
 <p><strong>BIRM-RS</strong>: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</p>
@@ -1089,9 +1090,13 @@ server &lt;- function(input, output) {
 
 shinyApp(ui = ui, server = server)
 </code></pre>
+</section>
+</section>
+<section id="sec-reference" class="level1">
+<h1>Reference</h1>
+<p>Noel, Yvonnick, &amp; Dauvier, Bruno (2007). A Beta Item Response Model for Continuous Bounded Responses. <em>Applied Psychological Measurement</em>, 31(1), 47–73. <a href="https://doi.org/10.1177/0146621605287691">https://doi.org/10.1177/0146621605287691</a>.</p>
 <!-- -->
 
-</section>
 </section>
 
 </main>
@@ -1580,7 +1585,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>**Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>, making it well-suited for modeling bounded continuous data, such as slider-scale responses.</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by Noël &amp; Dauvier (2009), which we extend in the subsequent tabs.</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by <span class="co">[</span><span class="ot">Noel &amp; Dauvier (2009)</span><span class="co">](#sec-reference)</span>, which we extend in the subsequent tabs.</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>**ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
@@ -2503,7 +2508,11 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-955"><a href="#cb2-955" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-956"><a href="#cb2-956" aria-hidden="true" tabindex="-1"></a><span class="ex">shinyApp</span><span class="er">(</span><span class="ex">ui</span> = ui, server = server<span class="kw">)</span></span>
 <span id="cb2-957"><a href="#cb2-957" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-958"><a href="#cb2-958" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb2-958"><a href="#cb2-958" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-959"><a href="#cb2-959" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-960"><a href="#cb2-960" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reference {#sec-reference}</span></span>
+<span id="cb2-961"><a href="#cb2-961" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-962"><a href="#cb2-962" aria-hidden="true" tabindex="-1"></a>Noel, Yvonnick, &amp; Dauvier, Bruno (2007). A Beta Item Response Model for Continuous Bounded Responses. *Applied Psychological Measurement*, 31(1), 47–73. <span class="co">[</span><span class="ot">https://doi.org/10.1177/0146621605287691</span><span class="co">](https://doi.org/10.1177/0146621605287691)</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
