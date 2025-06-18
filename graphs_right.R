@@ -27,8 +27,8 @@ sim_plot <- function(df,
     filter(x_num2 != 0) %>%
     filter(ars_prior == 0.9) %>%
     mutate(
-      x = factor(paste0("[", x_num1, "|", x_num2, "]"),
-                 levels = unique(paste0("[", x_num1, "|", x_num2, "]")))
+      x = factor(paste0("(", x_num1, "|", x_num2, ")"),
+                 levels = unique(paste0("(", x_num1, "|", x_num2, ")")))
     )
   
   
