@@ -46,7 +46,7 @@ The probability density functions represent the distribution of responses for a 
 
 ```{shinylive-r}
 #| standalone: true
-#| viewerHeight: 1500
+#| viewerHeight: 1800
 #| viewerWidth: 2000
 
 library(shiny)
