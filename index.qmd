@@ -22,19 +22,15 @@ embed-resources: false
 
 ## General Explanation
 
-This app illustrates the Beta Item Response Model (BIRM) with and without response styles (RS). It allows you to visualize how different parameters affect the probability density function (PDF) of the model. The app is divided into several tabs, each focusing on a specific aspect of the BIRM and response styles.
+This app illustrates the Beta Item Response Model (BIRM) with and without response styles (RS). It allows you to visualize how different parameters affect the probability density function of the model. The app is divided into several tabs, each focusing on a specific aspect of the BIRM and response styles.
 
-The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices $i$ (person) and $j$ (item):
-
-- **Index $i$**: Represents a person in the model.  
-- **Index $j$**: Represents an item in the model.
-
+The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices $i$ (person) and $j$ (item).
 
 ## Tabs
 
-**Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as slider-scale responses.
+**Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as responses on slider scales.
 
-**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function. This is the base model proposed by [Noel & Dauvier (2009)](#sec-reference), which we extend in the subsequent tabs.
+**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by [Noel & Dauvier (2009)](#sec-reference), which we extend in the subsequent tabs.
 
 **ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.
 
@@ -42,7 +38,7 @@ The probability density functions represent the distribution of responses for a 
 
 **BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.
 
-**BIRM-RS Simulation**: Simulates data based on the full BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.
+**BIRM-RS Simulation**: Simulates sample data based on the full BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.
 
 ## App
 
