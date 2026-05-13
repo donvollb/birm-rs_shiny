@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.23">
+<meta name="generator" content="quarto-1.7.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dominik Vollbracht">
 
-<title>Detecting Response Styles in Slider Scales</title>
+<title>Detecting Response Styles in Visual Analogue Scales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,14 +66,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-c55efa1fd218a545ebab9e5bcab7af02.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="shinylive:serviceworker_dir" content=".">
-<script src="index_files/libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
-<script src="index_files/libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
-<link href="index_files/libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
+<script src="index_files/libs/quarto-contrib/shinylive-0.10.8/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="index_files/libs/quarto-contrib/shinylive-0.10.8/shinylive/run-python-blocks.js" type="module"></script>
+<link href="index_files/libs/quarto-contrib/shinylive-0.10.8/shinylive/shinylive.css" rel="stylesheet">
 <link href="index_files/libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -130,8 +130,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Detecting Response Styles in Slider Scales</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">Online Materials and Shiny App</p>
+<div class="quarto-title-block"><div><h1 class="title">Detecting Response Styles in Visual Analogue Scales</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Shiny App: Illustration of the Beta Item Response Model with Response Styles</p>
 </div>
 
 
@@ -169,7 +169,7 @@ window.Quarto = {
 <p><strong>Standard Beta</strong>: Displays the probability density function of a standard beta distribution with shape parameters <span class="math inline">\(m_{ij}\)</span> and <span class="math inline">\(n_{ij}\)</span>. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as responses on slider scales.</p>
 <p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math inline">\(\theta_i\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by <a href="#sec-reference">Noel &amp; Dauvier (2009)</a>, which we extend in the subsequent tabs.</p>
 <p><strong>ERS only</strong>: Shows the BIRM with an additional extreme response style (ERS) parameter (<span class="math inline">\(\eta^{ERS}_{i}\)</span>). This tab allows you to examine how ERS influences the shape and location of the probability density function.</p>
-<p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math inline">\(\eta^{ARS}_{i}\)</span>) and effect-coded item wording (<span class="math inline">\(x_j\)</span>). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</p>
+<p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math inline">\(\eta^{ARS}_{i}\)</span>) and effect-coded item direction (<span class="math inline">\(x_j\)</span>). This tab visualizes how both the ARS parameter and item direction affect the probability density function.</p>
 <p><strong>BIRM-RS</strong>: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</p>
 <p><strong>BIRM-RS Simulation</strong>: Simulates sample data based on the full BIRM-RS model. It generates random values for person parameters (<span class="math inline">\(\theta_i\)</span>, <span class="math inline">\(\eta^{ERS}_{i}\)</span>, <span class="math inline">\(\eta^{ARS}_{i}\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</p>
 </section>
@@ -488,7 +488,7 @@ ui &lt;- navbarPage(
         ),
         radioButtons(
           "x_ars",
-          label = HTML("\\(x_{j}\\): Item wording. Coded as 1 for normally scored items and -1 for reverse-scored items."),
+          label = HTML("\\(x_{j}\\): Item direction. Coded as 1 for normally scored items and -1 for reverse-scored items."),
           selected = 1,
           choiceNames = c("1: normal-scored", "-1: reverse-scored"),
           choiceValues = c(1, -1)
@@ -554,7 +554,7 @@ ui &lt;- navbarPage(
         ),
         radioButtons(
           "x_birm_rs",
-          label = HTML("\\(x_{j}\\): item wording. Coded as 1 for normally scored items and -1 for reverse-scored items."),
+          label = HTML("\\(x_{j}\\): item direction. Coded as 1 for normally scored items and -1 for reverse-scored items."),
           selected = 1,
           choiceNames = c("1: normal-scored", "-1: reverse-scored"),
           choiceValues = c(1, -1)
@@ -664,7 +664,7 @@ ui &lt;- navbarPage(
         ),
         radioButtons(
           "x_sim",
-          label = withMathJax(HTML("\\( x_{j} \\): item wording")),
+          label = withMathJax(HTML("\\( x_{j} \\): item direction")),
           selected = 1,
           choiceNames = c("1: normal-scored", "-1: reverse-scored"),
           choiceValues = c(1, -1)
@@ -1549,8 +1549,8 @@ shinyApp(ui = ui, server = server)
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Detecting Response Styles in Slider Scales"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Online Materials and Shiny App"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Detecting Response Styles in Visual Analogue Scales"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Shiny App: Illustration of the Beta Item Response Model with Response Styles"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: "Dominik Vollbracht"</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    email: d.vollbracht@rptu.de</span></span>
@@ -1584,7 +1584,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>**ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>**ARS only**: Displays the BIRM with an acquiescence response style (ARS) parameter ($\eta^{ARS}_{i}$) and effect-coded item wording ($x_j$). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>**ARS only**: Displays the BIRM with an acquiescence response style (ARS) parameter ($\eta^{ARS}_{i}$) and effect-coded item direction ($x_j$). This tab visualizes how both the ARS parameter and item direction affect the probability density function.</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>**BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
@@ -1904,7 +1904,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a>        <span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a>        <span class="ex">radioButtons</span><span class="er">(</span></span>
 <span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a>          <span class="st">"x_ars"</span><span class="ex">,</span></span>
-<span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a>          <span class="ex">label</span> = HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(x_{j}</span><span class="dt">\\</span><span class="st">): Item wording. Coded as 1 for normally scored items and -1 for reverse-scored items."</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a>          <span class="ex">label</span> = HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(x_{j}</span><span class="dt">\\</span><span class="st">): Item direction. Coded as 1 for normally scored items and -1 for reverse-scored items."</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a>          <span class="ex">selected</span> = 1,</span>
 <span id="cb2-359"><a href="#cb2-359" aria-hidden="true" tabindex="-1"></a>          <span class="ex">choiceNames</span> = c<span class="er">(</span><span class="st">"1: normal-scored"</span><span class="ex">,</span> <span class="st">"-1: reverse-scored"</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-360"><a href="#cb2-360" aria-hidden="true" tabindex="-1"></a>          <span class="ex">choiceValues</span> = c<span class="er">(</span><span class="ex">1,</span> <span class="at">-1</span><span class="kw">)</span></span>
@@ -1970,7 +1970,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-420"><a href="#cb2-420" aria-hidden="true" tabindex="-1"></a>        <span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-421"><a href="#cb2-421" aria-hidden="true" tabindex="-1"></a>        <span class="ex">radioButtons</span><span class="er">(</span></span>
 <span id="cb2-422"><a href="#cb2-422" aria-hidden="true" tabindex="-1"></a>          <span class="st">"x_birm_rs"</span><span class="ex">,</span></span>
-<span id="cb2-423"><a href="#cb2-423" aria-hidden="true" tabindex="-1"></a>          <span class="ex">label</span> = HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(x_{j}</span><span class="dt">\\</span><span class="st">): item wording. Coded as 1 for normally scored items and -1 for reverse-scored items."</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-423"><a href="#cb2-423" aria-hidden="true" tabindex="-1"></a>          <span class="ex">label</span> = HTML<span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(x_{j}</span><span class="dt">\\</span><span class="st">): item direction. Coded as 1 for normally scored items and -1 for reverse-scored items."</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-424"><a href="#cb2-424" aria-hidden="true" tabindex="-1"></a>          <span class="ex">selected</span> = 1,</span>
 <span id="cb2-425"><a href="#cb2-425" aria-hidden="true" tabindex="-1"></a>          <span class="ex">choiceNames</span> = c<span class="er">(</span><span class="st">"1: normal-scored"</span><span class="ex">,</span> <span class="st">"-1: reverse-scored"</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-426"><a href="#cb2-426" aria-hidden="true" tabindex="-1"></a>          <span class="ex">choiceValues</span> = c<span class="er">(</span><span class="ex">1,</span> <span class="at">-1</span><span class="kw">)</span></span>
@@ -2080,7 +2080,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-530"><a href="#cb2-530" aria-hidden="true" tabindex="-1"></a>        <span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-531"><a href="#cb2-531" aria-hidden="true" tabindex="-1"></a>        <span class="ex">radioButtons</span><span class="er">(</span></span>
 <span id="cb2-532"><a href="#cb2-532" aria-hidden="true" tabindex="-1"></a>          <span class="st">"x_sim"</span><span class="ex">,</span></span>
-<span id="cb2-533"><a href="#cb2-533" aria-hidden="true" tabindex="-1"></a>          <span class="ex">label</span> = withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">( x_{j} </span><span class="dt">\\</span><span class="st">): item wording"</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-533"><a href="#cb2-533" aria-hidden="true" tabindex="-1"></a>          <span class="ex">label</span> = withMathJax<span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">( x_{j} </span><span class="dt">\\</span><span class="st">): item direction"</span><span class="kw">))</span><span class="ex">,</span></span>
 <span id="cb2-534"><a href="#cb2-534" aria-hidden="true" tabindex="-1"></a>          <span class="ex">selected</span> = 1,</span>
 <span id="cb2-535"><a href="#cb2-535" aria-hidden="true" tabindex="-1"></a>          <span class="ex">choiceNames</span> = c<span class="er">(</span><span class="st">"1: normal-scored"</span><span class="ex">,</span> <span class="st">"-1: reverse-scored"</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-536"><a href="#cb2-536" aria-hidden="true" tabindex="-1"></a>          <span class="ex">choiceValues</span> = c<span class="er">(</span><span class="ex">1,</span> <span class="at">-1</span><span class="kw">)</span></span>

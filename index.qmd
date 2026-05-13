@@ -1,6 +1,6 @@
 ---
-title: "Detecting Response Styles in Slider Scales"
-subtitle: "Online Materials and Shiny App"
+title: "Detecting Response Styles in Visual Analogue Scales"
+subtitle: "Shiny App: Illustration of the Beta Item Response Model with Response Styles"
 author: 
   - name: "Dominik Vollbracht"
     email: d.vollbracht@rptu.de
@@ -34,7 +34,7 @@ The probability density functions represent the distribution of responses for a 
 
 **ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.
 
-**ARS only**: Displays the BIRM with an acquiescence response style (ARS) parameter ($\eta^{ARS}_{i}$) and effect-coded item wording ($x_j$). This tab visualizes how both the ARS parameter and item polarity affect the probability density function.
+**ARS only**: Displays the BIRM with an acquiescence response style (ARS) parameter ($\eta^{ARS}_{i}$) and effect-coded item direction ($x_j$). This tab visualizes how both the ARS parameter and item direction affect the probability density function.
 
 **BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.
 
@@ -354,7 +354,7 @@ ui <- navbarPage(
         ),
         radioButtons(
           "x_ars",
-          label = HTML("\\(x_{j}\\): Item wording. Coded as 1 for normally scored items and -1 for reverse-scored items."),
+          label = HTML("\\(x_{j}\\): Item direction. Coded as 1 for normally scored items and -1 for reverse-scored items."),
           selected = 1,
           choiceNames = c("1: normal-scored", "-1: reverse-scored"),
           choiceValues = c(1, -1)
@@ -420,7 +420,7 @@ ui <- navbarPage(
         ),
         radioButtons(
           "x_birm_rs",
-          label = HTML("\\(x_{j}\\): item wording. Coded as 1 for normally scored items and -1 for reverse-scored items."),
+          label = HTML("\\(x_{j}\\): item direction. Coded as 1 for normally scored items and -1 for reverse-scored items."),
           selected = 1,
           choiceNames = c("1: normal-scored", "-1: reverse-scored"),
           choiceValues = c(1, -1)
@@ -530,7 +530,7 @@ ui <- navbarPage(
         ),
         radioButtons(
           "x_sim",
-          label = withMathJax(HTML("\\( x_{j} \\): item wording")),
+          label = withMathJax(HTML("\\( x_{j} \\): item direction")),
           selected = 1,
           choiceNames = c("1: normal-scored", "-1: reverse-scored"),
           choiceValues = c(1, -1)
