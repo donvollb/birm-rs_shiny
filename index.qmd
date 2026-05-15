@@ -30,7 +30,7 @@ The probability density functions represent the distribution of responses for a 
 
 **Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as responses on slider scales.
 
-**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by [Noel & Dauvier (2009)](#sec-reference), which we extend in the subsequent tabs.
+**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by [Noel & Dauvier (2007)](#sec-reference), which we extend in the subsequent tabs.
 
 **ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.
 
@@ -242,7 +242,7 @@ ui <- navbarPage(
         sliderInput(
           "tau_birm",
           withMathJax(HTML(
-            "\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."
+            "\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."
           )),
           min = 0,
           max = 3,
@@ -295,7 +295,7 @@ ui <- navbarPage(
         ),
         sliderInput(
           "tau_ers",
-          withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center.")),
+          withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center.")),
           min = 0,
           max = 3,
           value = 2,
@@ -346,7 +346,7 @@ ui <- navbarPage(
         ),
         sliderInput(
           "tau_ars",
-          HTML("\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
+          HTML("\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
           min = 0,
           max = 3,
           value = 2,
@@ -412,7 +412,7 @@ ui <- navbarPage(
         ),
         sliderInput(
           "tau_birm_rs",
-          HTML("\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
+          HTML("\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
           min = 0,
           max = 3,
           value = 2,

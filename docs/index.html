@@ -167,7 +167,7 @@ window.Quarto = {
 <section id="tabs" class="level2">
 <h2 class="anchored" data-anchor-id="tabs">Tabs</h2>
 <p><strong>Standard Beta</strong>: Displays the probability density function of a standard beta distribution with shape parameters <span class="math inline">\(m_{ij}\)</span> and <span class="math inline">\(n_{ij}\)</span>. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval [0, 1], making it well-suited for modeling bounded continuous data, such as responses on slider scales.</p>
-<p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math inline">\(\theta_i\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by <a href="#sec-reference">Noel &amp; Dauvier (2009)</a>, which we extend in the subsequent tabs.</p>
+<p><strong>BIRM</strong>: Illustrates the original Beta Item Response Model (BIRM) with person parameters (<span class="math inline">\(\theta_i\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by <a href="#sec-reference">Noel &amp; Dauvier (2007)</a>, which we extend in the subsequent tabs.</p>
 <p><strong>ERS only</strong>: Shows the BIRM with an additional extreme response style (ERS) parameter (<span class="math inline">\(\eta^{ERS}_{i}\)</span>). This tab allows you to examine how ERS influences the shape and location of the probability density function.</p>
 <p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math inline">\(\eta^{ARS}_{i}\)</span>) and effect-coded item direction (<span class="math inline">\(x_j\)</span>). This tab visualizes how both the ARS parameter and item direction affect the probability density function.</p>
 <p><strong>BIRM-RS</strong>: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</p>
@@ -376,7 +376,7 @@ ui &lt;- navbarPage(
         sliderInput(
           "tau_birm",
           withMathJax(HTML(
-            "\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."
+            "\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."
           )),
           min = 0,
           max = 3,
@@ -429,7 +429,7 @@ ui &lt;- navbarPage(
         ),
         sliderInput(
           "tau_ers",
-          withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center.")),
+          withMathJax(HTML("\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center.")),
           min = 0,
           max = 3,
           value = 2,
@@ -480,7 +480,7 @@ ui &lt;- navbarPage(
         ),
         sliderInput(
           "tau_ars",
-          HTML("\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
+          HTML("\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
           min = 0,
           max = 3,
           value = 2,
@@ -546,7 +546,7 @@ ui &lt;- navbarPage(
         ),
         sliderInput(
           "tau_birm_rs",
-          HTML("\\(\\tau_{j}\\): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
+          HTML("\\(\\tau_{j}\\): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."),
           min = 0,
           max = 3,
           value = 2,
@@ -1580,7 +1580,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>**Standard Beta**: Displays the probability density function of a standard beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. This visualization helps illustrate the fundamental properties of beta distributions. The beta distribution is defined on the interval <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span>, making it well-suited for modeling bounded continuous data, such as responses on slider scales.</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by <span class="co">[</span><span class="ot">Noel &amp; Dauvier (2009)</span><span class="co">](#sec-reference)</span>, which we extend in the subsequent tabs.</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>**BIRM**: Illustrates the original Beta Item Response Model (BIRM) with person parameters ($\theta_i$) and item parameters ($\delta_j$, $\tau_j$). This tab allows you to explore how these parameters influence the probability density function for a given set of parameters. This is the base model proposed by <span class="co">[</span><span class="ot">Noel &amp; Dauvier (2007)</span><span class="co">](#sec-reference)</span>, which we extend in the subsequent tabs.</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>**ERS only**: Shows the BIRM with an additional extreme response style (ERS) parameter ($\eta^{ERS}_{i}$). This tab allows you to examine how ERS influences the shape and location of the probability density function.</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
@@ -1792,7 +1792,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span></span>
 <span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>          <span class="st">"tau_birm"</span><span class="ex">,</span></span>
 <span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>          <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span></span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>            <span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>            <span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span></span>
 <span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>          <span class="kw">))</span><span class="ex">,</span></span>
 <span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>          <span class="ex">min</span> = 0,</span>
 <span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>          <span class="ex">max</span> = 3,</span>
@@ -1845,7 +1845,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>        <span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span></span>
 <span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>          <span class="st">"tau_ers"</span><span class="ex">,</span></span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>          <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span><span class="kw">))</span><span class="ex">,</span></span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>          <span class="ex">withMathJax</span><span class="er">(</span><span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span><span class="kw">))</span><span class="ex">,</span></span>
 <span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>          <span class="ex">min</span> = 0,</span>
 <span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>          <span class="ex">max</span> = 3,</span>
 <span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>          <span class="ex">value</span> = 2,</span>
@@ -1896,7 +1896,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a>        <span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span></span>
 <span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a>          <span class="st">"tau_ars"</span><span class="ex">,</span></span>
-<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a>          <span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a>          <span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a>          <span class="ex">min</span> = 0,</span>
 <span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a>          <span class="ex">max</span> = 3,</span>
 <span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a>          <span class="ex">value</span> = 2,</span>
@@ -1962,7 +1962,7 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a>        <span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a>        <span class="ex">sliderInput</span><span class="er">(</span></span>
 <span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a>          <span class="st">"tau_birm_rs"</span><span class="ex">,</span></span>
-<span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>          <span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Analogous to discrimination in IRT, but functions differently. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>          <span class="ex">HTML</span><span class="er">(</span><span class="st">"</span><span class="dt">\\</span><span class="st">(</span><span class="dt">\\</span><span class="st">tau_{j}</span><span class="dt">\\</span><span class="st">): item dispersion parameter. Conceptual overlap with the discrimination parameter in IRT. Higher values reduce the difference between shape parameters and increase them overall, leading to a narrower distribution slightly shifted toward the center."</span><span class="kw">)</span><span class="ex">,</span></span>
 <span id="cb2-416"><a href="#cb2-416" aria-hidden="true" tabindex="-1"></a>          <span class="ex">min</span> = 0,</span>
 <span id="cb2-417"><a href="#cb2-417" aria-hidden="true" tabindex="-1"></a>          <span class="ex">max</span> = 3,</span>
 <span id="cb2-418"><a href="#cb2-418" aria-hidden="true" tabindex="-1"></a>          <span class="ex">value</span> = 2,</span>
