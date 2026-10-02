@@ -22,6 +22,22 @@ This app illustrates the Beta Item Response Model (BIRM) with and without respon
 
 The Beta Item Response Model with Response Styles (BIRM-RS) and its evaluation in a simulation study and an empirical illustration are described in [Vollbracht et al. (2026)](#sec-reference). The app was developed as a supplement to this paper.
 
+## The Model
+
+In the BIRM, a response $Y_{ij}$ between 0 and 1 follows a beta distribution with shape parameters $m_{ij}$ and $n_{ij}$. The BIRM-RS adds two person parameters for response styles. Both shape parameters depend on the same term:
+
+$$
+z_{ij} = \exp(\eta^{ERS}_i) \cdot (\theta_i - \delta_j + x_j \cdot \eta^{ARS}_i),
+$$
+
+$$
+Y_{ij} \sim \text{Beta}(m_{ij}, n_{ij}), \quad
+m_{ij} = \exp\left(\frac{z_{ij} + \tau_j}{2}\right), \quad
+n_{ij} = \exp\left(\frac{-z_{ij} + \tau_j}{2}\right).
+$$
+
+Here, $\theta_i$ is the trait of person $i$, $\delta_j$ the difficulty of item $j$, $\tau_j$ its dispersion parameter, and $x_j$ is $1$ for regular and $-1$ for reverse-scored items. The expected response is $\text{logit}^{-1}(z_{ij})$. The ERS parameter $\eta^{ERS}_i$ stretches the distance between trait and item difficulty, so that responses move toward the end that the trait favors. Negative values shrink the distance and move responses toward the center (midpoint response style). ERS and MRS are thus the two poles of one dimension. The ARS parameter $\eta^{ARS}_i$ shifts responses toward agreement. Because this shift reverses with the item direction, reverse-scored items are needed to separate ARS from the trait. With $\eta^{ERS}_i = \eta^{ARS}_i = 0$, the model reduces to the BIRM of [Noel & Dauvier (2007)](#sec-reference).
+
 The probability density functions represent the distribution of responses for a given person–item combination, denoted by the indices $i$ (person) and $j$ (item).
 
 ## Tabs
