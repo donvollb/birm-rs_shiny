@@ -52,9 +52,9 @@ The probability density functions represent the distribution of responses for a 
 
 **BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.
 
-**BIRM-RS Simulation**: Simulates sample data based on the full BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.
+**BIRM-RS Simulation**: Simulates sample data based on the full BIRM-RS model. It generates random values for the person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$), draws one response per person to an item with the chosen item parameters ($\delta_j$, $\tau_j$), and shows the share of responses in bins of .05. The number of persons can be changed, and a button draws a new sample. This simulation is useful for understanding the model’s behavior across a sample.
 
-In the tabs with response styles, a grey dashed curve shows the same person (or, in the simulation, the same persons) without response styles. It can be switched off below the sliders.
+In the tabs with response styles, a grey dashed line shows the same person (or, in the simulation, the same persons) without response styles. It can be switched off below the sliders.
 
 ## App
 

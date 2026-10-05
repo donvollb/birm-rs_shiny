@@ -183,8 +183,8 @@ n_{ij} = \exp\left(\frac{-z_{ij} + \tau_j}{2}\right).
 <p><strong>ERS only</strong>: Shows the BIRM with an additional extreme response style (ERS) parameter (<span class="math inline">\(\eta^{ERS}_{i}\)</span>). This tab allows you to examine how ERS influences the shape and location of the probability density function.</p>
 <p><strong>ARS only</strong>: Displays the BIRM with an acquiescence response style (ARS) parameter (<span class="math inline">\(\eta^{ARS}_{i}\)</span>) and effect-coded item direction (<span class="math inline">\(x_j\)</span>). This tab visualizes how both the ARS parameter and item direction affect the probability density function.</p>
 <p><strong>BIRM-RS</strong>: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</p>
-<p><strong>BIRM-RS Simulation</strong>: Simulates sample data based on the full BIRM-RS model. It generates random values for person parameters (<span class="math inline">\(\theta_i\)</span>, <span class="math inline">\(\eta^{ERS}_{i}\)</span>, <span class="math inline">\(\eta^{ARS}_{i}\)</span>) and item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</p>
-<p>In the tabs with response styles, a grey dashed curve shows the same person (or, in the simulation, the same persons) without response styles. It can be switched off below the sliders.</p>
+<p><strong>BIRM-RS Simulation</strong>: Simulates sample data based on the full BIRM-RS model. It generates random values for the person parameters (<span class="math inline">\(\theta_i\)</span>, <span class="math inline">\(\eta^{ERS}_{i}\)</span>, <span class="math inline">\(\eta^{ARS}_{i}\)</span>), draws one response per person to an item with the chosen item parameters (<span class="math inline">\(\delta_j\)</span>, <span class="math inline">\(\tau_j\)</span>), and shows the share of responses in bins of .05. The number of persons can be changed, and a button draws a new sample. This simulation is useful for understanding the model’s behavior across a sample.</p>
+<p>In the tabs with response styles, a grey dashed line shows the same person (or, in the simulation, the same persons) without response styles. It can be switched off below the sliders.</p>
 </section>
 <section id="app" class="level2">
 <h2 class="anchored" data-anchor-id="app">App</h2>
@@ -343,10 +343,10 @@ beta_sample &lt;- function(
   theta_sd = 1,
   tau = 2,
   ars_mu = 0,
-  ars_sd = 0.5,
+  ars_sd = 0.3,
   x = 1,
   ers_mu = 0,
-  ers_sd = 0.5,
+  ers_sd = 0.3,
   show_ref = FALSE
 ) {
   x &lt;- as.numeric(x)
@@ -370,35 +370,46 @@ beta_sample &lt;- function(
     as.data.frame()
 
   vec &lt;- rbeta(n, tmp[, 1], tmp[, 2])
-  dens &lt;- density(vec)
+
+  # Share of all responses per bin of .05
+  breaks &lt;- seq(0, 1, by = 0.05)
+  share_of &lt;- function(v) hist(v, breaks = breaks, plot = FALSE)$counts / length(v)
+  share &lt;- share_of(vec)
 
   # Same persons without response styles
   if (show_ref) {
     shapes_ref &lt;- birm_shapes(theta_vals, delta, tau)
-    dens_ref &lt;- density(rbeta(n, shapes_ref[1:n], shapes_ref[(n + 1):(2 * n)]))
+    share_ref &lt;- share_of(rbeta(n, shapes_ref[1:n], shapes_ref[(n + 1):(2 * n)]))
   }
 
-  par(mar = c(5.1, 4.5, 4.1, 2.1))
+  y_top &lt;- max(c(share, if (show_ref) share_ref, 0.05)) * if (show_ref) 1.2 else 1.1
+
+  par(mar = c(5.1, 4.6, 4.1, 2.1))
 
   plot(
-    dens,
-    col = col_model,
-    lwd = 2.5,
-    ylim = c(0, max(dens$y, if (show_ref) dens_ref$y) * if (show_ref) 1.15 else 1),
-    main = paste0("Density From Simulated Data (n = ", n, ")"),
+    NA,
+    xlim = c(0, 1),
+    ylim = c(0, y_top),
+    yaxs = "i",
+    main = paste0("Simulated Responses to One Item (n = ", n, ")"),
     xlab = expression(bold(Response ~ Y[ij])),
-    ylab = expression(bold(f(hat(Y)[ij])))
+    ylab = expression(bold(Share ~ of ~ all ~ responses))
   )
+  rect(breaks[-length(breaks)], 0, breaks[-1], share, col = col_model,
+       border = "white")
   if (show_ref) {
-    lines(dens_ref, col = col_ref, lty = 2, lwd = 2)
-    lines(dens, col = col_model, lwd = 2.5)
+    # Outline of the bars without response styles
+    lines(rep(breaks, each = 2), c(0, rep(share_ref, each = 2), 0),
+          col = col_ref, lty = 2, lwd = 2)
     legend(
       "top",
       horiz = TRUE,
       legend = c("with response styles", "without response styles"),
-      col = c(col_model, col_ref),
-      lty = c(1, 2),
-      lwd = c(2.5, 2),
+      fill = c(col_model, NA),
+      border = NA,
+      col = c(NA, col_ref),
+      lty = c(NA, 2),
+      lwd = c(NA, 2),
       bty = "n"
     )
   }
@@ -732,7 +743,7 @@ ui &lt;- navbarPage(
           )),
           min = 0,
           max = 1,
-          value = 0.5,
+          value = 0.3,
           step = 0.1
         ),
         withMathJax(HTML(
@@ -755,7 +766,7 @@ ui &lt;- navbarPage(
           )),
           min = 0,
           max = 1,
-          value = 0.5,
+          value = 0.3,
           step = 0.1
         ),
         withMathJax(HTML(
@@ -789,7 +800,19 @@ ui &lt;- navbarPage(
           "ref_sim",
           "Show the same persons without response styles (grey)",
           TRUE
-        )
+        ),
+        withMathJax(HTML(
+          "&lt;hr style='margin: 20px 0; border: 1px solid gray;'&gt;"
+        )),
+        sliderInput(
+          "n_sim",
+          "Number of persons",
+          min = 100,
+          max = 5000,
+          value = 1000,
+          step = 100
+        ),
+        actionButton("resample_sim", "Draw a new sample")
       ),
       mainPanel(
         uiOutput("simulation_equation_title1"),
@@ -1193,9 +1216,14 @@ server &lt;- function(input, output) {
     )
   })
 
+  # Same sample until the button is pressed
+  seed_sim &lt;- reactiveVal(1)
+  observeEvent(input$resample_sim, seed_sim(seed_sim() + 1))
+
   output$simulation &lt;- renderPlot({
+    set.seed(seed_sim())
     beta_sample(
-      n = 1000,
+      n = input$n_sim,
       delta = input$delta_sim,
       theta_mu = input$theta_mu_sim,
       theta_sd = input$theta_sd_sim,
@@ -1729,9 +1757,9 @@ shinyApp(ui = ui, server = server)
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>**BIRM-RS**: Combines both ERS and ARS parameters in the BIRM. This tab enables you to explore the joint influence of these two response styles on the probability density function.</span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>**BIRM-RS Simulation**: Simulates sample data based on the full BIRM-RS model. It generates random values for person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$) and item parameters ($\delta_j$, $\tau_j$), and visualizes the resulting density functions. This simulation is useful for understanding the model’s behavior across a sample.</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>**BIRM-RS Simulation**: Simulates sample data based on the full BIRM-RS model. It generates random values for the person parameters ($\theta_i$, $\eta^{ERS}_{i}$, $\eta^{ARS}_{i}$), draws one response per person to an item with the chosen item parameters ($\delta_j$, $\tau_j$), and shows the share of responses in bins of .05. The number of persons can be changed, and a button draws a new sample. This simulation is useful for understanding the model’s behavior across a sample.</span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>In the tabs with response styles, a grey dashed curve shows the same person (or, in the simulation, the same persons) without response styles. It can be switched off below the sliders.</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>In the tabs with response styles, a grey dashed line shows the same person (or, in the simulation, the same persons) without response styles. It can be switched off below the sliders.</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## App</span></span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>

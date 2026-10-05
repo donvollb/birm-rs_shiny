@@ -26,7 +26,7 @@ The R package [birmrssim](https://github.com/donvollb/birmrssim) provides functi
 | BIRM-RS | Combines both response styles |
 | BIRM-RS Simulation | Simulated responses of a sample of persons to one item |
 
-In the tabs with response styles, a grey dashed curve shows the same person (or persons) without response styles.
+In the tabs with response styles, a grey dashed line shows the same person (or persons) without response styles.
 
 ---
 

@@ -119,10 +119,10 @@ beta_sample <- function(
   theta_sd = 1,
   tau = 2,
   ars_mu = 0,
-  ars_sd = 0.5,
+  ars_sd = 0.3,
   x = 1,
   ers_mu = 0,
-  ers_sd = 0.5,
+  ers_sd = 0.3,
   show_ref = FALSE
 ) {
   x <- as.numeric(x)
@@ -146,35 +146,46 @@ beta_sample <- function(
     as.data.frame()
 
   vec <- rbeta(n, tmp[, 1], tmp[, 2])
-  dens <- density(vec)
+
+  # Share of all responses per bin of .05
+  breaks <- seq(0, 1, by = 0.05)
+  share_of <- function(v) hist(v, breaks = breaks, plot = FALSE)$counts / length(v)
+  share <- share_of(vec)
 
   # Same persons without response styles
   if (show_ref) {
     shapes_ref <- birm_shapes(theta_vals, delta, tau)
-    dens_ref <- density(rbeta(n, shapes_ref[1:n], shapes_ref[(n + 1):(2 * n)]))
+    share_ref <- share_of(rbeta(n, shapes_ref[1:n], shapes_ref[(n + 1):(2 * n)]))
   }
 
-  par(mar = c(5.1, 4.5, 4.1, 2.1))
+  y_top <- max(c(share, if (show_ref) share_ref, 0.05)) * if (show_ref) 1.2 else 1.1
+
+  par(mar = c(5.1, 4.6, 4.1, 2.1))
 
   plot(
-    dens,
-    col = col_model,
-    lwd = 2.5,
-    ylim = c(0, max(dens$y, if (show_ref) dens_ref$y) * if (show_ref) 1.15 else 1),
-    main = paste0("Density From Simulated Data (n = ", n, ")"),
+    NA,
+    xlim = c(0, 1),
+    ylim = c(0, y_top),
+    yaxs = "i",
+    main = paste0("Simulated Responses to One Item (n = ", n, ")"),
     xlab = expression(bold(Response ~ Y[ij])),
-    ylab = expression(bold(f(hat(Y)[ij])))
+    ylab = expression(bold(Share ~ of ~ all ~ responses))
   )
+  rect(breaks[-length(breaks)], 0, breaks[-1], share, col = col_model,
+       border = "white")
   if (show_ref) {
-    lines(dens_ref, col = col_ref, lty = 2, lwd = 2)
-    lines(dens, col = col_model, lwd = 2.5)
+    # Outline of the bars without response styles
+    lines(rep(breaks, each = 2), c(0, rep(share_ref, each = 2), 0),
+          col = col_ref, lty = 2, lwd = 2)
     legend(
       "top",
       horiz = TRUE,
       legend = c("with response styles", "without response styles"),
-      col = c(col_model, col_ref),
-      lty = c(1, 2),
-      lwd = c(2.5, 2),
+      fill = c(col_model, NA),
+      border = NA,
+      col = c(NA, col_ref),
+      lty = c(NA, 2),
+      lwd = c(NA, 2),
       bty = "n"
     )
   }
@@ -508,7 +519,7 @@ ui <- navbarPage(
           )),
           min = 0,
           max = 1,
-          value = 0.5,
+          value = 0.3,
           step = 0.1
         ),
         withMathJax(HTML(
@@ -531,7 +542,7 @@ ui <- navbarPage(
           )),
           min = 0,
           max = 1,
-          value = 0.5,
+          value = 0.3,
           step = 0.1
         ),
         withMathJax(HTML(
@@ -565,7 +576,19 @@ ui <- navbarPage(
           "ref_sim",
           "Show the same persons without response styles (grey)",
           TRUE
-        )
+        ),
+        withMathJax(HTML(
+          "<hr style='margin: 20px 0; border: 1px solid gray;'>"
+        )),
+        sliderInput(
+          "n_sim",
+          "Number of persons",
+          min = 100,
+          max = 5000,
+          value = 1000,
+          step = 100
+        ),
+        actionButton("resample_sim", "Draw a new sample")
       ),
       mainPanel(
         uiOutput("simulation_equation_title1"),
@@ -969,9 +992,14 @@ server <- function(input, output) {
     )
   })
 
+  # Same sample until the button is pressed
+  seed_sim <- reactiveVal(1)
+  observeEvent(input$resample_sim, seed_sim(seed_sim() + 1))
+
   output$simulation <- renderPlot({
+    set.seed(seed_sim())
     beta_sample(
-      n = 1000,
+      n = input$n_sim,
       delta = input$delta_sim,
       theta_mu = input$theta_mu_sim,
       theta_sd = input$theta_sd_sim,
